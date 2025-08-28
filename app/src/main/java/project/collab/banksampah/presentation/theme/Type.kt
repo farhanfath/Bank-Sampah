@@ -1,4 +1,4 @@
-package project.collab.banksampah.ui.theme
+package project.collab.banksampah.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
