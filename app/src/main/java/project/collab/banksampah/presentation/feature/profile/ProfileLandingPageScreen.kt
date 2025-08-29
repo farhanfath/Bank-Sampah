@@ -1,4 +1,4 @@
-package project.collab.banksampah.presentation.feature.landingpage
+package project.collab.banksampah.presentation.feature.profile
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,8 +20,11 @@ import project.collab.banksampah.presentation.theme.Spacing_20
 import project.collab.banksampah.presentation.theme.Spacing_30
 import project.collab.banksampah.presentation.theme.Spacing_50
 
+/**
+ * screen when user haven't login when on the profile section
+ */
 @Composable
-fun LandingPageScreen(
+fun ProfileLandingPageScreen(
     onLoginClick: () -> Unit,
     onRegisterClick: () -> Unit
 ) {
@@ -61,8 +64,8 @@ fun LandingPageScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun LandingPageScreenPreview() {
-    LandingPageScreen(
+fun ProfileLandingPageScreenPreview() {
+    ProfileLandingPageScreen(
         onLoginClick = {},
         onRegisterClick = {}
     )
