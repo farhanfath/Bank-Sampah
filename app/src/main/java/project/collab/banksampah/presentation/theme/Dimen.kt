@@ -13,11 +13,17 @@ val Spacing_30 = 30.dp
 val Spacing_50 = 50.dp
 val Spacing_150 = 150.dp
 
-
+val Size_1 = 1.dp
+val Size_2 = 2.dp
+val Size_3 = 3.dp
 val Size_20 = 20.dp
+val Size_30 = 30.dp
+val Size_50 = 50.dp
+val Size_75 = 75.dp
 val Size_100 = 100.dp
 val Size_150 = 150.dp
 val Size_200 = 200.dp
+val Size_220 = 220.dp
 val Size_250 = 250.dp
 
 val Font_30 = 30.sp

@@ -1,4 +1,4 @@
-package project.collab.banksampah.presentation.feature.profile
+package project.collab.banksampah.presentation.feature.profile.landing
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
