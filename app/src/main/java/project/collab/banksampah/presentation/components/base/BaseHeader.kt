@@ -15,17 +15,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import project.collab.banksampah.presentation.theme.Font_32
 import project.collab.banksampah.presentation.theme.PrimaryBlack
 import project.collab.banksampah.presentation.theme.PrimaryGreen
+import project.collab.banksampah.presentation.theme.Size_20
+import project.collab.banksampah.presentation.theme.Size_30
 import project.collab.banksampah.presentation.theme.Spacing_30
 
 @Composable
 fun BaseHeader(
-    title: String,
     modifier: Modifier = Modifier,
+    title: String,
+    textStyle: TextStyle = MaterialTheme.typography.headlineMedium.copy(
+        textAlign = TextAlign.Center,
+        color = Color.Black,
+        fontWeight = FontWeight.Bold,
+    ),
     onBackClick: () -> Unit
 ) {
     Spacer(modifier = Modifier.size(Spacing_30))
@@ -34,7 +42,9 @@ fun BaseHeader(
         contentAlignment = Alignment.Center
     ) {
         IconButton(
-            modifier = Modifier.align(
+            modifier = Modifier
+                .size(Size_30)
+                .align(
                 alignment = Alignment.CenterStart
             ),
             colors = IconButtonDefaults.iconButtonColors(
@@ -50,11 +60,7 @@ fun BaseHeader(
         }
         Text(
             text = title,
-            style = MaterialTheme.typography.headlineMedium.copy(
-                textAlign = TextAlign.Center,
-                color = Color.Black,
-                fontWeight = FontWeight.Bold,
-            )
+            style = textStyle
         )
     }
 

@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import project.collab.banksampah.presentation.feature.auth.components.AuthHeader
 import project.collab.banksampah.presentation.feature.auth.login.components.LoginForm
-import project.collab.banksampah.presentation.feature.auth.login.state.LoginData
+import project.collab.banksampah.domain.model.request.LoginRequest
 import project.collab.banksampah.presentation.theme.Spacing_150
 
 @Composable
@@ -22,7 +22,7 @@ fun LoginScreen(
     onForgotPasswordClick: () -> Unit,
     onBackClick: () -> Unit
 ) {
-    var loginData by remember { mutableStateOf(LoginData()) }
+    var loginData by remember { mutableStateOf(LoginRequest()) }
 
     Column(
         modifier = Modifier.fillMaxSize()

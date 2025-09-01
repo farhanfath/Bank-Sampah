@@ -23,15 +23,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import project.collab.banksampah.presentation.components.base.BaseButton
 import project.collab.banksampah.presentation.components.base.PasswordTextField
 import project.collab.banksampah.presentation.components.base.PhoneTextField
-import project.collab.banksampah.presentation.feature.auth.login.state.LoginData
+import project.collab.banksampah.domain.model.request.LoginRequest
 import project.collab.banksampah.presentation.theme.PrimaryGreen
 import project.collab.banksampah.presentation.theme.Spacing_12
 import project.collab.banksampah.presentation.theme.Spacing_16
 
 @Composable
 fun ColumnScope.LoginForm(
-    loginData: LoginData,
-    onDataChange: (LoginData) -> Unit,
+    loginData: LoginRequest,
+    onDataChange: (LoginRequest) -> Unit,
     onLoginClick: () -> Unit,
     onGoToRegisterClick: () -> Unit,
     onForgotPasswordClick: () -> Unit
@@ -132,7 +132,7 @@ fun ColumnScope.LoginForm(
 fun LoginFormPreview() {
     Column {
         LoginForm(
-            loginData = LoginData(),
+            loginData = LoginRequest(),
             onDataChange = {},
             onLoginClick = {},
             onGoToRegisterClick = {},

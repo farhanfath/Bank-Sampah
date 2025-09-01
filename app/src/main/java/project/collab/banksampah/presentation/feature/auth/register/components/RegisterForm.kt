@@ -3,7 +3,6 @@ package project.collab.banksampah.presentation.feature.auth.register.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -29,13 +28,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
+import project.collab.banksampah.domain.model.request.RegisterRequest
 import project.collab.banksampah.presentation.components.base.AddressTextField
 import project.collab.banksampah.presentation.components.base.BaseButton
 import project.collab.banksampah.presentation.components.base.BaseTextField
 import project.collab.banksampah.presentation.components.base.NikTextField
 import project.collab.banksampah.presentation.components.base.PasswordTextField
 import project.collab.banksampah.presentation.components.base.PhoneTextField
-import project.collab.banksampah.presentation.feature.auth.register.state.RegisterData
 import project.collab.banksampah.presentation.theme.AccentGrey
 import project.collab.banksampah.presentation.theme.PrimaryGreen
 import project.collab.banksampah.presentation.theme.Size_20
@@ -44,8 +43,8 @@ import project.collab.banksampah.presentation.theme.Spacing_16
 
 @Composable
 fun RegisterForm(
-    registerData: RegisterData,
-    onDataChange: (RegisterData) -> Unit,
+    registerData: RegisterRequest,
+    onDataChange: (RegisterRequest) -> Unit,
     onRegisterClick: () -> Unit,
     onGoToLoginClick: () -> Unit
 ) {
@@ -205,7 +204,7 @@ fun RegisterForm(
 fun RegisterFormPreview() {
     Column {
         RegisterForm(
-            registerData = RegisterData(),
+            registerData = RegisterRequest(),
             onDataChange = {},
             onRegisterClick = {},
             onGoToLoginClick = {}

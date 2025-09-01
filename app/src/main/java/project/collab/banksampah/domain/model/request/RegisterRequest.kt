@@ -1,6 +1,6 @@
-package project.collab.banksampah.presentation.feature.auth.register.state
+package project.collab.banksampah.domain.model.request
 
-data class RegisterData(
+data class RegisterRequest(
     val name: String = "",
     val nik: String = "",
     val phoneNumber: String = "",
