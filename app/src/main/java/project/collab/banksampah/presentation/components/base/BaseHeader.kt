@@ -3,7 +3,6 @@ package project.collab.banksampah.presentation.components.base
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronLeft
@@ -21,7 +20,6 @@ import androidx.compose.ui.text.style.TextAlign
 import project.collab.banksampah.presentation.theme.Font_32
 import project.collab.banksampah.presentation.theme.PrimaryBlack
 import project.collab.banksampah.presentation.theme.PrimaryGreen
-import project.collab.banksampah.presentation.theme.Spacing_10
 import project.collab.banksampah.presentation.theme.Spacing_30
 
 @Composable
@@ -32,9 +30,7 @@ fun BaseHeader(
 ) {
     Spacer(modifier = Modifier.size(Spacing_30))
     Box(
-        modifier = Modifier
-            .padding(horizontal = Spacing_10)
-            .fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
         IconButton(
@@ -54,11 +50,10 @@ fun BaseHeader(
         }
         Text(
             text = title,
-            style = MaterialTheme.typography.displayMedium.copy(
+            style = MaterialTheme.typography.headlineMedium.copy(
                 textAlign = TextAlign.Center,
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
-                fontSize = Font_32
             )
         )
     }

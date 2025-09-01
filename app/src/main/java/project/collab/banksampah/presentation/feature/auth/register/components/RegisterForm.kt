@@ -43,7 +43,7 @@ import project.collab.banksampah.presentation.theme.Spacing_12
 import project.collab.banksampah.presentation.theme.Spacing_16
 
 @Composable
-fun ColumnScope.RegisterForm(
+fun RegisterForm(
     registerData: RegisterData,
     onDataChange: (RegisterData) -> Unit,
     onRegisterClick: () -> Unit,

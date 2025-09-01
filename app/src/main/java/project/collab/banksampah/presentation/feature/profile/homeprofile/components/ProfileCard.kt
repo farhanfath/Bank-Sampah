@@ -36,6 +36,7 @@ fun ProfileCard(
     onClick: () -> Unit
 ) {
     BaseCard(
+        modifier = Modifier.fillMaxWidth(),
         onClick = onClick
     ) {
         Row(
