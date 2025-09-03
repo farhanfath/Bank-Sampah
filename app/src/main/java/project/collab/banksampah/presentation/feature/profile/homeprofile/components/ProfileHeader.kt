@@ -33,7 +33,7 @@ import project.collab.banksampah.presentation.theme.Spacing_4
 
 @Composable
 fun ProfileHeader(
-
+    onUserProfileClick: () -> Unit
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -41,6 +41,7 @@ fun ProfileHeader(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Card(
+            onClick = onUserProfileClick,
             colors = CardDefaults.cardColors(
                 containerColor = PrimaryGreen
             ),
@@ -95,5 +96,7 @@ fun ProfileHeader(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewProfileHeader() {
-    ProfileHeader()
+    ProfileHeader(
+        onUserProfileClick = {}
+    )
 }

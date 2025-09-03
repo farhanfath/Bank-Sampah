@@ -1,0 +1,22 @@
+package project.collab.banksampah.presentation.navigation.extensions
+
+import androidx.navigation.NavHostController
+import project.collab.banksampah.presentation.feature.profile.homeprofile.state.HomeProfileNavigator
+import project.collab.banksampah.presentation.navigation.route.NavRoute
+
+/**
+ * Profile navigation
+ */
+fun NavHostController.navigateToUserProfile() = navigate(NavRoute.Profile.UserProfile)
+fun NavHostController.navigateToRedeemPoint() = navigate(NavRoute.Profile.RedeemPoint)
+fun NavHostController.navigateToHistoryRedeemPoint() = navigate(NavRoute.Profile.HistoryRedeemPoint)
+fun NavHostController.navigateToHistoryRedeemTrash() = navigate(NavRoute.Profile.HistoryRedeemTrash)
+
+fun NavHostController.asHomeProfileNavigator(): HomeProfileNavigator =
+    object : HomeProfileNavigator {
+        override fun navigateToUserProfile() = this@asHomeProfileNavigator.navigateToUserProfile()
+        override fun navigateToRedeemPoint() = this@asHomeProfileNavigator.navigateToRedeemPoint()
+        override fun navigateToHistoryRedeemPoint() = this@asHomeProfileNavigator.navigateToHistoryRedeemPoint()
+        override fun navigateToHistoryRedeemTrash() = this@asHomeProfileNavigator.navigateToHistoryRedeemTrash()
+    }
+

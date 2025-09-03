@@ -12,7 +12,11 @@ import project.collab.banksampah.presentation.components.base.BaseTitleSection
 import project.collab.banksampah.presentation.theme.Spacing_20
 
 @Composable
-fun ProfileMenu() {
+fun ProfileMenu(
+    onRedeemPointClick: () -> Unit,
+    onHistoryRedeemPointClick: () -> Unit,
+    onHistoryRedeemTrashClick: () -> Unit
+) {
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(Spacing_20),
@@ -27,7 +31,7 @@ fun ProfileMenu() {
                 title = "Penukaran Poin",
                 description = "Ayo tukarkan poin mu sekarang juga!",
                 icon = R.drawable.ic_point_redeem,
-                onClick = {}
+                onClick = onRedeemPointClick
             )
         }
 
@@ -35,7 +39,7 @@ fun ProfileMenu() {
             ProfileCard(
                 title = "Riawayat Penukaran Poin",
                 icon = R.drawable.ic_point_history,
-                onClick = {}
+                onClick = onHistoryRedeemPointClick
             )
         }
 
@@ -43,7 +47,7 @@ fun ProfileMenu() {
             ProfileCard(
                 title = "Riawayat Penukaran Sampah",
                 icon = R.drawable.ic_point_trash_redeem,
-                onClick = {}
+                onClick = onHistoryRedeemTrashClick
             )
         }
     }
@@ -52,5 +56,9 @@ fun ProfileMenu() {
 @Preview(showBackground = true)
 @Composable
 private fun PreviewProfileMenu() {
-    ProfileMenu()
+    ProfileMenu(
+        onRedeemPointClick = {},
+        onHistoryRedeemPointClick = {},
+        onHistoryRedeemTrashClick = {}
+    )
 }

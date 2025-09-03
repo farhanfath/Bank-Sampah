@@ -3,43 +3,59 @@ package project.collab.banksampah.presentation.navigation.route
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class NavRoute {
+sealed class NavRoute(val route: String) {
 
     @Serializable
-    object Dashboard : NavRoute()
+    object Auth : NavRoute("Auth") {
+
+        @Serializable
+        object Login : NavRoute("AuthLogin")
+
+        @Serializable
+        object Register : NavRoute("AuthRegister")
+
+        @Serializable
+        object ForgotPass: NavRoute("AuthForgotPass")
+    }
 
     /**
      * Bottom Navigation Route
      */
     @Serializable
-    object Home : NavRoute()
+    object Home : NavRoute("Home") {
+
+        @Serializable
+        object Lobby : NavRoute("HomeLobby")
+
+        @Serializable
+        object Gallery : NavRoute("HomeGallery")
+
+        @Serializable
+        object TypeTrash : NavRoute("HomeTypeTrash")
+
+        @Serializable
+        object Schedule : NavRoute("HomeSchedule")
+
+        @Serializable
+        object Profile : NavRoute("HomeProfile")
+
+        @Serializable
+        object Forum : NavRoute("HomeForum")
+    }
 
     @Serializable
-    object Gallery : NavRoute()
+    object Profile : NavRoute("Profile") {
 
-    // section jenis sampah
-    @Serializable
-    object TypeTrash : NavRoute()
+        @Serializable
+        object UserProfile : NavRoute("UserProfile")
 
-    @Serializable
-    object Schedule : NavRoute()
+        @Serializable
+        object RedeemPoint : NavRoute("RedeemPoint")
 
-    @Serializable
-    object Profile : NavRoute()
+        @Serializable
+        object HistoryRedeemPoint : NavRoute("HistoryRedeemPoint")
 
-    @Serializable
-    object Forum : NavRoute()
-}
-
-@Serializable
-sealed class AuthRoute {
-
-    @Serializable
-    object Login : AuthRoute()
-
-    @Serializable
-    object Register : AuthRoute()
-
-    @Serializable
-    object ForgotPass: AuthRoute()
+        @Serializable
+        object HistoryRedeemTrash : NavRoute("HistoryRedeemTrash")
+    }
 }

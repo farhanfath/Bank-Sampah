@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -46,7 +47,7 @@ fun RedeemPointScreen(
     onBackClick: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
-    val redeemPointData by remember { mutableStateOf(RedeemPointData()) }
+    var redeemPointData by remember { mutableStateOf(RedeemPointData()) }
 
     Column(
         modifier = Modifier
