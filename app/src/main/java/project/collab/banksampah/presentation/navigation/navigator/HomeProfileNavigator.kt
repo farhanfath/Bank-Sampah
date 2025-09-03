@@ -1,4 +1,4 @@
-package project.collab.banksampah.presentation.feature.profile.homeprofile.state
+package project.collab.banksampah.presentation.navigation.navigator
 
 interface HomeProfileNavigator {
     fun navigateToUserProfile()

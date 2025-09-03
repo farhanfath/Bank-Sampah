@@ -1,7 +1,8 @@
 package project.collab.banksampah.presentation.navigation.extensions
 
 import androidx.navigation.NavHostController
-import project.collab.banksampah.presentation.feature.profile.homeprofile.state.HomeProfileNavigator
+import project.collab.banksampah.presentation.navigation.navigator.AuthNavigator
+import project.collab.banksampah.presentation.navigation.navigator.HomeProfileNavigator
 import project.collab.banksampah.presentation.navigation.route.NavRoute
 
 /**
@@ -20,3 +21,16 @@ fun NavHostController.asHomeProfileNavigator(): HomeProfileNavigator =
         override fun navigateToHistoryRedeemTrash() = this@asHomeProfileNavigator.navigateToHistoryRedeemTrash()
     }
 
+/**
+ * auth navigation
+ */
+fun NavHostController.navigateToLogin() = navigate(NavRoute.Auth.Login)
+fun NavHostController.navigateToRegister() = navigate(NavRoute.Auth.Register)
+fun NavHostController.navigateToForgotPass() = navigate(NavRoute.Auth.ForgotPass)
+
+fun NavHostController.asAuthNavigator() : AuthNavigator =
+    object : AuthNavigator {
+        override fun navigateToLogin() = this@asAuthNavigator.navigateToLogin()
+        override fun navigateToRegister() = this@asAuthNavigator.navigateToRegister()
+        override fun navigateToForgotPass() = this@asAuthNavigator.navigateToForgotPass()
+    }

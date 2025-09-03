@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import project.collab.banksampah.presentation.feature.profile.homeprofile.components.ProfileHeader
 import project.collab.banksampah.presentation.feature.profile.homeprofile.components.ProfileMenu
-import project.collab.banksampah.presentation.feature.profile.homeprofile.state.HomeProfileNavigator
+import project.collab.banksampah.presentation.navigation.navigator.HomeProfileNavigator
 import project.collab.banksampah.presentation.theme.Spacing_16
 import project.collab.banksampah.presentation.theme.Spacing_50
 
