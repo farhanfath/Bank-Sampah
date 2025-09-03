@@ -1,11 +1,9 @@
 package project.collab.banksampah.presentation.navigation.host
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
 import androidx.navigation.navigation
 import project.collab.banksampah.getHistoryRedeemPointResponse
 import project.collab.banksampah.getRedeemTrashHistoryResponse
@@ -13,7 +11,6 @@ import project.collab.banksampah.presentation.feature.auth.login.LoginScreen
 import project.collab.banksampah.presentation.feature.auth.register.RegisterScreen
 import project.collab.banksampah.presentation.feature.profile.historyRedeemTrash.RedeemTrashHistoryScreen
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.HistoryRedeemPointScreen
-import project.collab.banksampah.presentation.feature.profile.historyredeempoint.state.HistoryRedeemPointResponse
 import project.collab.banksampah.presentation.feature.profile.redeempoint.RedeemPointScreen
 import project.collab.banksampah.presentation.feature.profile.user.ProfileUserScreen
 import project.collab.banksampah.presentation.navigation.route.NavRoute
@@ -62,9 +59,9 @@ fun AppNavHost(
             )
         }
         composable<NavRoute.Profile.RedeemPoint> {
-            RedeemPointScreen {
-
-            }
+            RedeemPointScreen(
+                onBackClick = navController::navigateUp
+            )
         }
         composable<NavRoute.Profile.HistoryRedeemPoint> {
             HistoryRedeemPointScreen(
