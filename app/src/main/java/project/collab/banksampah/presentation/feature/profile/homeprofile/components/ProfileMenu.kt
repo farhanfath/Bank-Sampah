@@ -42,7 +42,7 @@ fun ProfileMenu() {
         item {
             ProfileCard(
                 title = "Riawayat Penukaran Sampah",
-                icon = R.drawable.ic_trash_redeem,
+                icon = R.drawable.ic_point_trash_redeem,
                 onClick = {}
             )
         }

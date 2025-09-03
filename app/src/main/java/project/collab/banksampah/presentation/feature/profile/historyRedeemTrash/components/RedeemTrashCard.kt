@@ -1,0 +1,98 @@
+package project.collab.banksampah.presentation.feature.profile.historyRedeemTrash.components
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import project.collab.banksampah.R
+import project.collab.banksampah.presentation.components.base.BaseCard
+import project.collab.banksampah.presentation.components.base.BaseImage
+import project.collab.banksampah.presentation.feature.profile.historyRedeemTrash.state.RedeemTrashHistoryData
+import project.collab.banksampah.presentation.theme.PrimaryGreen
+import project.collab.banksampah.presentation.theme.Spacing_10
+import project.collab.banksampah.presentation.theme.Spacing_12
+import project.collab.banksampah.presentation.theme.Spacing_30
+import project.collab.banksampah.presentation.theme.Spacing_4
+
+@Composable
+fun RedeemTrashCard(
+    redeemTrashHistoryData: RedeemTrashHistoryData,
+    onClick: () -> Unit
+) {
+    BaseCard(
+        modifier = Modifier.fillMaxWidth(),
+        onClick = onClick
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(
+                    vertical = Spacing_30,
+                    horizontal = Spacing_12
+                )
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(Spacing_4)
+            ) {
+                Text(
+                    text = "Tanggal Penukaran",
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+
+                // date
+                Text(
+                    text = redeemTrashHistoryData.date,
+                    style = MaterialTheme.typography.labelLarge
+                )
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = "Permintaan Poin",
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+
+                    Spacer(modifier = Modifier.size(Spacing_10))
+
+                    Text(
+                        text = redeemTrashHistoryData.totalPoint,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                BaseImage(
+                    image = R.drawable.ic_trash_redeem
+                )
+
+                Spacer(modifier = Modifier.size(Spacing_4))
+
+                Icon(
+                    imageVector = Icons.Default.ChevronRight,
+                    contentDescription = "",
+                    tint = PrimaryGreen
+                )
+            }
+        }
+    }
+}
