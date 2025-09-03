@@ -28,7 +28,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
-import project.collab.banksampah.domain.model.request.RegisterRequest
+import project.collab.banksampah.domain.model.request.user.RegisterRequest
 import project.collab.banksampah.presentation.components.base.AddressTextField
 import project.collab.banksampah.presentation.components.base.BaseButton
 import project.collab.banksampah.presentation.components.base.BaseTextField

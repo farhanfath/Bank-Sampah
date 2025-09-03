@@ -9,7 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import project.collab.banksampah.domain.model.request.RegisterRequest
+import project.collab.banksampah.domain.model.request.user.RegisterRequest
 import project.collab.banksampah.presentation.feature.auth.components.AuthHeader
 import project.collab.banksampah.presentation.feature.auth.register.components.RegisterForm
 

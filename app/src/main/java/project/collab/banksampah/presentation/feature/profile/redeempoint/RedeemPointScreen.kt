@@ -50,7 +50,7 @@ fun RedeemPointScreen(
 
     Column(
         modifier = Modifier
-            .padding(horizontal = Spacing_16, vertical = Spacing_4  )
+            .padding(horizontal = Spacing_16, vertical = Spacing_4)
             .fillMaxSize(),
     ) {
         BaseHeader(

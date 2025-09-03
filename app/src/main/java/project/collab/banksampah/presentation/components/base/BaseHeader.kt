@@ -44,9 +44,7 @@ fun BaseHeader(
         IconButton(
             modifier = Modifier
                 .size(Size_30)
-                .align(
-                alignment = Alignment.CenterStart
-            ),
+                .align(alignment = Alignment.CenterStart),
             colors = IconButtonDefaults.iconButtonColors(
                 containerColor = PrimaryGreen,
                 contentColor = PrimaryBlack

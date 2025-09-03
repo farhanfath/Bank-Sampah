@@ -1,4 +1,4 @@
-package project.collab.banksampah.domain.model.request
+package project.collab.banksampah.domain.model.request.user
 
 data class RegisterRequest(
     val name: String = "",

@@ -18,3 +18,5 @@ val PrimaryGrey = Color(0xFFB2B2B2)
 
 val AccentWhite = Color(0xFFFDFAF5)
 val AccentGrey = Color(0xFFBFBFBF)
+
+val SecondaryGrey = Color(0xFFD9D9D9)

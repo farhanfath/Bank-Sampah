@@ -7,18 +7,21 @@ import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import project.collab.banksampah.presentation.theme.AccentWhite
 import project.collab.banksampah.presentation.theme.PrimaryGreen
+import project.collab.banksampah.presentation.theme.Spacing_15
 
 @Composable
 fun BaseButton(
-    text: String,
     modifier: Modifier = Modifier,
+    text: String,
     textStyle: TextStyle = LocalTextStyle.current,
     enabled: Boolean = true,
-    shape: RoundedCornerShape = RoundedCornerShape(15.dp),
+    containerColor: Color = PrimaryGreen,
+    shape: RoundedCornerShape = RoundedCornerShape(Spacing_15),
     onClick: () -> Unit,
 ) {
     Button(
@@ -27,7 +30,7 @@ fun BaseButton(
         enabled = enabled,
         shape = shape,
         colors = ButtonDefaults.buttonColors().copy(
-            containerColor = PrimaryGreen,
+            containerColor = containerColor,
             contentColor = AccentWhite
         )
     ) {
