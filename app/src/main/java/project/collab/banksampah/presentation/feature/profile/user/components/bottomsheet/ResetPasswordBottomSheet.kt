@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import project.collab.banksampah.domain.model.request.user.ResetPassRequest
+import project.collab.banksampah.domain.model.request.ResetPassRequest
 import project.collab.banksampah.presentation.components.base.BaseBottomSheet
 import project.collab.banksampah.presentation.components.base.BaseButton
 import project.collab.banksampah.presentation.components.base.PasswordTextField

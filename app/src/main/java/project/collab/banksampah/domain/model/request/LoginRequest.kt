@@ -1,4 +1,4 @@
-package project.collab.banksampah.domain.model.request.user
+package project.collab.banksampah.domain.model.request
 
 data class LoginRequest(
     val phoneNumber: String = "",

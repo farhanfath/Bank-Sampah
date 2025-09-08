@@ -28,7 +28,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
-import project.collab.banksampah.domain.model.request.user.RegisterRequest
+import project.collab.banksampah.domain.model.request.RegisterRequest
 import project.collab.banksampah.presentation.components.base.AddressTextField
 import project.collab.banksampah.presentation.components.base.BaseButton
 import project.collab.banksampah.presentation.components.base.BaseTextField
@@ -130,9 +130,9 @@ fun RegisterForm(
         item {
             BaseTextField(
                 hint = "Cabang BSU",
-                value = registerData.cabangBSU,
+                value = registerData.bsuBranchName,
                 onValueChange = {
-                    onDataChange(registerData.copy(cabangBSU = it))
+                    onDataChange(registerData.copy(bsuBranchName = it))
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
@@ -166,7 +166,7 @@ fun RegisterForm(
         }
 
         item {
-            val buttonCondition = registerData.name.isNotBlank() && registerData.nik.isNotBlank() && registerData.phoneNumber.isNotBlank() && registerData.address.isNotBlank() && registerData.cabangBSU.isNotBlank() && registerData.password.isNotBlank()
+            val buttonCondition = registerData.name.isNotBlank() && registerData.nik.isNotBlank() && registerData.phoneNumber.isNotBlank() && registerData.address.isNotBlank() && registerData.bsuBranchName.isNotBlank() && registerData.password.isNotBlank()
             BaseButton(
                 modifier = Modifier.fillMaxWidth(),
                 text = "Daftar",

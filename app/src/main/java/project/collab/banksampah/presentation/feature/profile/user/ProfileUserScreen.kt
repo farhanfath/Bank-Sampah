@@ -12,8 +12,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import project.collab.banksampah.domain.model.request.user.ResetPassRequest
-import project.collab.banksampah.domain.model.request.user.UserRequest
+import project.collab.banksampah.domain.model.request.ResetPassRequest
+import project.collab.banksampah.domain.model.request.UserRequest
 import project.collab.banksampah.presentation.components.base.BaseHeader
 import project.collab.banksampah.presentation.components.base.rememberVisibilityState
 import project.collab.banksampah.presentation.feature.profile.user.components.ContactUsSection

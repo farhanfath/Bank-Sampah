@@ -13,6 +13,8 @@ import project.collab.banksampah.presentation.feature.profile.historyRedeemTrash
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.HistoryRedeemPointScreen
 import project.collab.banksampah.presentation.feature.profile.redeempoint.RedeemPointScreen
 import project.collab.banksampah.presentation.feature.profile.user.ProfileUserScreen
+import project.collab.banksampah.presentation.navigation.extensions.navigateToLogin
+import project.collab.banksampah.presentation.navigation.extensions.navigateToRegister
 import project.collab.banksampah.presentation.navigation.route.NavRoute
 
 @Composable
@@ -33,24 +35,21 @@ fun AppNavHost(
             }
         }
 
-        navigation<NavRoute.Auth>(
-            startDestination = NavRoute.Auth.Login
-        ) {
-            composable<NavRoute.Auth.Login> {
-                LoginScreen(
-                    onLoginClick = {},
-                    onGoToRegisterClick = {},
-                    onForgotPasswordClick = {},
-                    onBackClick = navController::navigateUp
-                )
-            }
-            composable<NavRoute.Auth.Register> {
-                RegisterScreen(
-                    onRegisterClick = {},
-                    onGoToLoginClick = {},
-                    onBackClick = navController::navigateUp
-                )
-            }
+        composable<NavRoute.Auth.Login> {
+            LoginScreen(
+                onLoginSuccess = {},
+                onGoToRegisterClick = navController::navigateToRegister,
+                onForgotPasswordClick = {},
+                onBackClick = navController::navigateUp
+            )
+        }
+
+        composable<NavRoute.Auth.Register> {
+            RegisterScreen(
+                onRegisterSuccess = navController::navigateToLogin,
+                onGoToLoginClick = navController::navigateToLogin,
+                onBackClick = navController::navigateUp
+            )
         }
 
         composable<NavRoute.Profile.UserProfile> {

@@ -12,7 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import project.collab.banksampah.domain.model.request.user.RedeemPointRequest
+import project.collab.banksampah.domain.model.request.RedeemPointRequest
 import project.collab.banksampah.presentation.components.base.BaseHeader
 import project.collab.banksampah.presentation.feature.profile.redeempoint.components.RedeemPointForm
 import project.collab.banksampah.presentation.feature.profile.redeempoint.components.TotalPointCard

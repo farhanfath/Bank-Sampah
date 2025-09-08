@@ -61,34 +61,29 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    // coroutines core
-    implementation(libs.kotlinx.coroutines.core)
+    // coroutines
+    implementation(libs.bundles.kotlinx.coroutine)
+
     // paging
-    implementation(libs.paging.runtime)
+    implementation(libs.bundles.paging)
 
     // koin
-    implementation(libs.koin.android)
+    implementation(libs.bundles.koin)
 
-    // retrofit
-    implementation (libs.retrofit)
-    implementation (libs.retrofit2.converter.gson)
-    implementation(libs.logging.interceptor)
+    // ktor
+    implementation(libs.bundles.ktor)
 
-    // coroutines
-    implementation (libs.kotlinx.coroutines.android)
+    // paging
+    implementation(libs.bundles.paging)
 
     // viewmodel
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     // coil
-    implementation(libs.coil3.coil.compose)
-    implementation(libs.coil.network.okhttp)
+    implementation(libs.bundles.coil)
 
     // navigation
-    implementation(libs.androidx.navigation.compose)
-
-    // serialization
-    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.bundles.navigation)
 
     // icons
     implementation(libs.androidx.material.icons.extended)
@@ -96,6 +91,9 @@ dependencies {
     // shimmer
     implementation(libs.compose.shimmer)
 
-    // paging compose
-    implementation(libs.androidx.paging.compose)
+    // datastore
+    implementation(libs.androidx.datastore.preferences)
+
+    // accompanist
+    implementation(libs.accompanist.permissions)
 }
