@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material3.Icon
@@ -23,6 +25,8 @@ import project.collab.banksampah.presentation.components.base.BaseImage
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.state.HistoryRedeemPointData
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.state.RedeemStatus
 import project.collab.banksampah.presentation.theme.PrimaryGreen
+import project.collab.banksampah.presentation.theme.Size_20
+import project.collab.banksampah.presentation.theme.Size_40
 import project.collab.banksampah.presentation.theme.Spacing_10
 import project.collab.banksampah.presentation.theme.Spacing_12
 import project.collab.banksampah.presentation.theme.Spacing_30
@@ -80,7 +84,9 @@ fun HistoryPointCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 BaseImage(
-                    image = R.drawable.ic_point_second
+                    image = R.drawable.ic_point_second,
+                    modifier = Modifier.width(Size_40).height(Size_20)
+                    
                 )
 
                 Spacer(modifier = Modifier.size(Spacing_4))

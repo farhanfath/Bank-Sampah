@@ -65,7 +65,7 @@ object HttpClientFactory {
 
             // Default request configuration
             defaultRequest {
-                url("https://your-api-base-url.com")
+                url("https://bank-sampah-api-gamma.vercel.app")
                 headers.append("Content-Type", "application/json")
                 headers.append("Accept", "application/json")
             }

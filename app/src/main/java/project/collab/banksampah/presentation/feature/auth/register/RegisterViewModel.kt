@@ -34,7 +34,8 @@ class RegisterViewModel (
                     _registerState.update {
                         it.copy(
                             isLoading = false,
-                            message = error.message.toString()
+                            message = error.message,
+                            isRegisterFailed = true
                         )
                     }
                 }

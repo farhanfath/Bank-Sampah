@@ -6,12 +6,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.koin.androidx.compose.koinViewModel
 import project.collab.banksampah.domain.model.request.ResetPassRequest
 import project.collab.banksampah.domain.model.request.UserRequest
 import project.collab.banksampah.presentation.components.base.BaseHeader
@@ -32,6 +35,7 @@ import project.collab.banksampah.presentation.utils.show
 
 @Composable
 fun ProfileUserScreen(
+    userViewModel: UserViewModel = koinViewModel(),
     onBackClick: () -> Unit
 ) {
     var editUserData by remember { mutableStateOf(UserRequest()) }
@@ -43,6 +47,12 @@ fun ProfileUserScreen(
     val resetPassBottomSheetState = rememberVisibilityState()
     val faqBottomSheetState = rememberVisibilityState()
 
+    val userDataState by userViewModel.userDataState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        userViewModel.getUserData()
+    }
+
     Column(
         modifier = Modifier
             .padding(horizontal = Spacing_16, vertical = Spacing_4)
@@ -53,10 +63,13 @@ fun ProfileUserScreen(
             onBackClick = onBackClick
         )
 
-        UserProfileSection(
-            onImageChangeClick = profileImageChangeBottomSheetState::show,
-            onLogoutClick = logoutDialogState::show
-        )
+        if (userDataState.userData != null) {
+            UserProfileSection(
+                userData = userDataState.userData!!,
+                onImageChangeClick = profileImageChangeBottomSheetState::show,
+                onLogoutClick = logoutDialogState::show
+            )
+        }
 
         Spacer(modifier = Modifier.size(Spacing_50))
 
@@ -82,7 +95,10 @@ fun ProfileUserScreen(
         LogoutDialog(
             isVisible = logoutDialogState.value,
             onDismiss = logoutDialogState::hide,
-            onLogoutClick = {}
+            onLogoutClick = {
+                userViewModel.logout()
+                onBackClick()
+            }
         )
 
         UserSettingBottomSheet(

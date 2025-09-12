@@ -1,6 +1,7 @@
 package project.collab.banksampah.presentation.navigation.extensions
 
 import androidx.navigation.NavHostController
+import project.collab.banksampah.domain.model.response.article.Article
 import project.collab.banksampah.presentation.navigation.navigator.HomeProfileNavigator
 import project.collab.banksampah.presentation.navigation.route.NavRoute
 
@@ -27,13 +28,17 @@ fun NavHostController.navigateToLogin() = navigate(NavRoute.Auth.Login)
 fun NavHostController.navigateToRegister() = navigate(NavRoute.Auth.Register)
 fun NavHostController.navigateToForgotPass() = navigate(NavRoute.Auth.ForgotPass)
 
-
-// gaperlu
-fun NavHostController.navigateToHome() {
-    navigate(NavRoute.Home.Lobby) {
-        popUpTo(graph.startDestinationId) {
-            inclusive = true
-        }
-        launchSingleTop = true
-    }
+/**
+ * lobby navigation
+ */
+fun NavHostController.navigateToArticleDetail(article: Article) {
+    navigate(
+        route = NavRoute.Detail.ArticleDetail(
+            articleId = article.id,
+            title = article.title,
+            description = article.description,
+            imageUrl = article.coverImageUrl,
+            timeStamp = article.timestamp
+        )
+    )
 }

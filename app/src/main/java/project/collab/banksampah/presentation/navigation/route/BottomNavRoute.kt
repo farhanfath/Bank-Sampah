@@ -36,27 +36,21 @@ val navItems = listOf(
         selectedIcon = Icons.Filled.Image
     ),
     BottomNavRoute(
-        name = "Jenis Sampah",
+        name = "Kategori",
         route = NavRoute.Home.TypeTrash,
         icon = Icons.AutoMirrored.Outlined.ListAlt,
         selectedIcon = Icons.AutoMirrored.Filled.ListAlt
     ),
     BottomNavRoute(
-        name = "Jadwal Penukaran",
+        name = "Jadwal",
         route = NavRoute.Home.Schedule,
         icon = Icons.Outlined.CalendarMonth,
         selectedIcon = Icons.Filled.CalendarMonth
     ),
     BottomNavRoute(
-        name = "Profile",
+        name = "Profil",
         route = NavRoute.Home.Profile,
         icon = Icons.Outlined.Person,
         selectedIcon = Icons.Filled.Person
-    ),
-    BottomNavRoute(
-        name = "Forum",
-        route = NavRoute.Home.Forum,
-        icon = Icons.AutoMirrored.Outlined.Chat,
-        selectedIcon = Icons.AutoMirrored.Filled.Chat
     )
 )

@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import project.collab.banksampah.R
+import project.collab.banksampah.domain.model.User
 import project.collab.banksampah.presentation.components.base.BaseCircleImage
 import project.collab.banksampah.presentation.theme.PrimaryGreen
 import project.collab.banksampah.presentation.theme.PrimaryRed
@@ -35,8 +36,9 @@ import project.collab.banksampah.presentation.theme.Spacing_4
 
 @Composable
 fun UserProfileSection(
+    userData: User,
     onLogoutClick: () -> Unit,
-    onImageChangeClick: () -> Unit
+    onImageChangeClick: () -> Unit,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -77,17 +79,17 @@ fun UserProfileSection(
             verticalArrangement = Arrangement.spacedBy(Spacing_4)
         ) {
             Text(
-                text = "Naufal Fadhil Rizqi",
+                text = userData.name,
                 style = MaterialTheme.typography.bodyMedium.copy(
                     fontWeight = FontWeight.Bold
                 )
             )
             Text(
-                text = "ID: 123456789",
+                text = "ID: ${userData.userId}",
                 style = MaterialTheme.typography.bodySmall
             )
             Text(
-                text = "Cabang BSU: 001",
+                text = "Cabang BSU: ${userData.bsuBranchCode}",
                 style = MaterialTheme.typography.bodySmall
             )
         }

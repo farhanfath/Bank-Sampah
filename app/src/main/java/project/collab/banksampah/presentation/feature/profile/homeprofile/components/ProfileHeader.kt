@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import project.collab.banksampah.presentation.feature.profile.user.UserUiState
 import project.collab.banksampah.presentation.theme.PrimaryGreen
 import project.collab.banksampah.presentation.theme.Size_2
 import project.collab.banksampah.presentation.theme.Size_50
@@ -33,6 +34,7 @@ import project.collab.banksampah.presentation.theme.Spacing_4
 
 @Composable
 fun ProfileHeader(
+    userName: String,
     onUserProfileClick: () -> Unit
 ) {
     Row(
@@ -71,7 +73,7 @@ fun ProfileHeader(
                         )
                     )
                     Text(
-                        text = "Naufal Fadhil Rizqi",
+                        text = userName,
                         style = MaterialTheme.typography.bodyMedium.copy(
                             color = Color.Black
                         )
@@ -97,6 +99,7 @@ fun ProfileHeader(
 @Composable
 private fun PreviewProfileHeader() {
     ProfileHeader(
+        userName = "",
         onUserProfileClick = {}
     )
 }

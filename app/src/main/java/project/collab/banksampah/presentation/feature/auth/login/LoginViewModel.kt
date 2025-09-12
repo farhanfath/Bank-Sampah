@@ -27,7 +27,8 @@ class LoginViewModel (
                         it.copy(
                             isLoading = false,
                             message = response.message,
-                            isLoginSuccess = true
+                            isLoginSuccess = true,
+                            isLoginFailed = false
                         )
                     }
                 }
@@ -35,10 +36,23 @@ class LoginViewModel (
                     _loginState.update {
                         it.copy(
                             isLoading = false,
-                            error = error.message.toString()
+                            error = error.message,
+                            isLoginFailed = true,
+                            isLoginSuccess = false,
                         )
                     }
                 }
+        }
+    }
+
+    fun clearLoginResult() {
+        _loginState.update {
+            it.copy(
+                isLoginSuccess = false,
+                isLoginFailed = false,
+                message = null,
+                error = null
+            )
         }
     }
 }

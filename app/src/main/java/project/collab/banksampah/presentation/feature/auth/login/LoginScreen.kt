@@ -1,5 +1,6 @@
 package project.collab.banksampah.presentation.feature.auth.login
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -10,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
@@ -27,15 +29,30 @@ fun LoginScreen(
     onForgotPasswordClick: () -> Unit,
     onBackClick: () -> Unit
 ) {
-    var loginData by remember { mutableStateOf(LoginRequest()) }
+    val context = LocalContext.current
 
+    var loginData by remember { mutableStateOf(LoginRequest()) }
     val loginState by viewModel.loginState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(loginState.isLoginSuccess) {
-        if (loginState.isLoginSuccess) {
-            onLoginSuccess()
+    LaunchedEffect(loginState.isLoginSuccess, loginState.isLoginFailed) {
+        when {
+            loginState.isLoginSuccess -> {
+                loginState.message?.takeIf { it.isNotBlank() }?.let { message ->
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                }
+                viewModel.clearLoginResult()
+                onLoginSuccess()
+            }
+
+            loginState.isLoginFailed -> {
+                loginState.error?.takeIf { it.isNotBlank() }?.let { error ->
+                    Toast.makeText(context, error, Toast.LENGTH_LONG).show()
+                }
+                viewModel.clearLoginResult()
+            }
         }
     }
+
     LoadingOverlay(
         isVisible = loginState.isLoading
     ) {

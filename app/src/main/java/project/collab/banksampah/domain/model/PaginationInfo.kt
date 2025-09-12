@@ -1,5 +1,6 @@
 package project.collab.banksampah.domain.model
 
+
 data class PaginationInfo(
     val currentPage: Int,
     val perPage: Int,

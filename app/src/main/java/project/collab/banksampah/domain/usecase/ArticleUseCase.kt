@@ -10,7 +10,7 @@ import project.collab.banksampah.domain.repository.ArticleRepository
 import project.collab.banksampah.domain.utils.ResponseResult
 
 interface ArticleUseCase {
-    fun getArticlesList(articleTitle: String?) : Flow<PagingData<Article>>
+    fun getArticlesList(articleTitle: String? = null) : Flow<PagingData<Article>>
     suspend fun getArticleById(id: String): ResponseResult<Article>
 }
 

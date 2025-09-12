@@ -21,6 +21,7 @@ import project.collab.banksampah.presentation.components.base.BaseCard
 import project.collab.banksampah.presentation.components.base.BaseImage
 import project.collab.banksampah.presentation.theme.PrimaryGreen
 import project.collab.banksampah.presentation.theme.Size_150
+import project.collab.banksampah.presentation.theme.Size_200
 import project.collab.banksampah.presentation.theme.Size_220
 import project.collab.banksampah.presentation.theme.Size_30
 import project.collab.banksampah.presentation.theme.Size_75
@@ -51,7 +52,7 @@ fun ProfileCard(
         ) {
             Column {
                 Text(
-                    modifier = Modifier.width(Size_220),
+                    modifier = Modifier.width(Size_200),
                     text = title,
                     style = MaterialTheme.typography.headlineSmall
                 )

@@ -79,7 +79,10 @@ fun LogoutDialog(
                             fontWeight = FontWeight.Bold
                         ),
                         shape = RoundedCornerShape(Spacing_20),
-                        onClick = onLogoutClick
+                        onClick = {
+                            onLogoutClick()
+                            onDismiss()
+                        }
                     )
                 }
             }

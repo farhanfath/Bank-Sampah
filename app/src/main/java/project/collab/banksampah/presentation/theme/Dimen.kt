@@ -11,6 +11,7 @@ val Spacing_12 = 12.dp
 val Spacing_15 = 15.dp
 val Spacing_16 = 16.dp
 val Spacing_20 = 20.dp
+val Spacing_24 = 24.dp
 val Spacing_30 = 30.dp
 val Spacing_50 = 50.dp
 val Spacing_150 = 150.dp
@@ -36,5 +37,9 @@ val Size_200 = 200.dp
 val Size_220 = 220.dp
 val Size_250 = 250.dp
 
+val Font_10 = 10.sp
+val Font_12 = 12.sp
+val Font_14 = 14.sp
+val Font_18 = 18.sp
 val Font_30 = 30.sp
 val Font_32 = 32.sp

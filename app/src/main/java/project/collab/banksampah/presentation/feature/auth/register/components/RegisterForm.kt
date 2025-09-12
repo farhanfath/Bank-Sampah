@@ -154,6 +154,32 @@ fun RegisterForm(
         }
 
         item {
+            BaseTextField(
+                hint = "Kode Cabang BSU",
+                value = registerData.bsuBranchCode,
+                onValueChange = {
+                    onDataChange(registerData.copy(bsuBranchCode = it))
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next,
+                    capitalization = KeyboardCapitalization.Words
+                ),
+                keyboardActions = KeyboardActions(
+                    onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                ),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Business,
+                        contentDescription = "Branch",
+                        tint = AccentGrey,
+                        modifier = Modifier.size(Size_20)
+                    )
+                }
+            )
+        }
+
+        item {
             PasswordTextField(
                 value = registerData.password,
                 onValueChange = {

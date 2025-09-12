@@ -37,7 +37,7 @@ fun ProfileMenu(
 
         item {
             ProfileCard(
-                title = "Riawayat Penukaran Poin",
+                title = "Riwayat Penukaran Poin",
                 icon = R.drawable.ic_point_history,
                 onClick = onHistoryRedeemPointClick
             )
@@ -45,7 +45,7 @@ fun ProfileMenu(
 
         item {
             ProfileCard(
-                title = "Riawayat Penukaran Sampah",
+                title = "Riwayat Penukaran Sampah",
                 icon = R.drawable.ic_point_trash_redeem,
                 onClick = onHistoryRedeemTrashClick
             )

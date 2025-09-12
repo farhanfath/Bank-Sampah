@@ -5,8 +5,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import androidx.navigation.toRoute
 import project.collab.banksampah.getHistoryRedeemPointResponse
 import project.collab.banksampah.getRedeemTrashHistoryResponse
+import project.collab.banksampah.presentation.feature.article_detail.SmartScrollArticleDetailScreen
 import project.collab.banksampah.presentation.feature.auth.login.LoginScreen
 import project.collab.banksampah.presentation.feature.auth.register.RegisterScreen
 import project.collab.banksampah.presentation.feature.profile.historyRedeemTrash.RedeemTrashHistoryScreen
@@ -31,13 +33,14 @@ fun AppNavHost(
             composable<NavRoute.Home.Lobby> {
                 HomeBottomSheetHost(
                     mainNavController = navController
+
                 )
             }
         }
 
         composable<NavRoute.Auth.Login> {
             LoginScreen(
-                onLoginSuccess = {},
+                onLoginSuccess = navController::navigateUp,
                 onGoToRegisterClick = navController::navigateToRegister,
                 onForgotPasswordClick = {},
                 onBackClick = navController::navigateUp
@@ -46,7 +49,7 @@ fun AppNavHost(
 
         composable<NavRoute.Auth.Register> {
             RegisterScreen(
-                onRegisterSuccess = navController::navigateToLogin,
+                onRegisterSuccess = navController::navigateUp,
                 onGoToLoginClick = navController::navigateToLogin,
                 onBackClick = navController::navigateUp
             )
@@ -72,6 +75,17 @@ fun AppNavHost(
             RedeemTrashHistoryScreen(
                 onBackClick = navController::navigateUp,
                 redeemTrashHistoryResponse = getRedeemTrashHistoryResponse()
+            )
+        }
+        composable<NavRoute.Detail.ArticleDetail> { entry ->
+            val articleDetail = entry.toRoute<NavRoute.Detail.ArticleDetail>()
+            SmartScrollArticleDetailScreen(
+                onBackClick = navController::navigateUp,
+                articleId = articleDetail.articleId,
+                title = articleDetail.title,
+                description = articleDetail.description,
+                imageUrl = articleDetail.imageUrl,
+                timeStamp = articleDetail.timeStamp,
             )
         }
     }

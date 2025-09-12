@@ -46,6 +46,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import project.collab.banksampah.presentation.navigation.route.BottomNavRoute
 import project.collab.banksampah.presentation.navigation.route.NavRoute
+import project.collab.banksampah.presentation.navigation.route.navItems
 import project.collab.banksampah.presentation.theme.PrimaryGreen
 import project.collab.banksampah.presentation.theme.Size_40
 import project.collab.banksampah.presentation.theme.Size_80
@@ -74,7 +75,6 @@ fun CustomBottomNavigationBar(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
                     .height(Size_80),
                 shape = RoundedCornerShape(Size_40),
                 colors = CardDefaults.cardColors(
@@ -91,7 +91,7 @@ fun CustomBottomNavigationBar(
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    mainNavItems.forEach { navItem ->
+                    navItems.forEach { navItem ->
                         val isSelected = currentDestination?.hierarchy?.any {
                             it.hasRoute(navItem.route::class)
                         } == true
@@ -108,52 +108,6 @@ fun CustomBottomNavigationBar(
                                     restoreState = true
                                 }
                             }
-                        )
-                    }
-                }
-            }
-
-            // forum icon
-            Box {
-                val isForumSelected = currentDestination?.hierarchy?.any {
-                    it.hasRoute(NavRoute.Home.Forum::class)
-                } == true
-
-                Card(
-                    modifier = Modifier
-                        .size(64.dp)
-                        .clickable {
-                            navController.navigate(NavRoute.Home.Forum) {
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        },
-                    shape = CircleShape,
-                    colors = CardDefaults.cardColors(
-                        containerColor = if (isForumSelected)
-                            MaterialTheme.colorScheme.primary
-                        else
-                            MaterialTheme.colorScheme.surface
-                    ),
-                    elevation = CardDefaults.cardElevation(
-                        defaultElevation = 8.dp
-                    )
-                ) {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            imageVector = if (isForumSelected)
-                                Icons.AutoMirrored.Filled.Chat
-                            else
-                                Icons.AutoMirrored.Outlined.Chat,
-                            contentDescription = "Forum",
-                            tint = if (isForumSelected) Color.White else MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier.size(24.dp)
                         )
                     }
                 }
@@ -175,7 +129,6 @@ private fun NavigationItem(
             .padding(vertical = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Icon with circular background when selected
         Box(
             modifier = Modifier
                 .size(Size_40),
@@ -226,36 +179,3 @@ private fun NavigationItem(
         )
     }
 }
-
-val mainNavItems = listOf(
-    BottomNavRoute(
-        name = "Beranda",
-        route = NavRoute.Home.Lobby,
-        icon = Icons.Outlined.Home,
-        selectedIcon = Icons.Filled.Home
-    ),
-    BottomNavRoute(
-        name = "Galeri",
-        route = NavRoute.Home.Gallery,
-        icon = Icons.Outlined.Image,
-        selectedIcon = Icons.Filled.Image
-    ),
-    BottomNavRoute(
-        name = "Jenis\nSampah",
-        route = NavRoute.Home.TypeTrash,
-        icon = Icons.AutoMirrored.Outlined.ListAlt,
-        selectedIcon = Icons.AutoMirrored.Filled.ListAlt
-    ),
-    BottomNavRoute(
-        name = "Jadwal\nPenukaran",
-        route = NavRoute.Home.Schedule,
-        icon = Icons.Outlined.CalendarMonth,
-        selectedIcon = Icons.Filled.CalendarMonth
-    ),
-    BottomNavRoute(
-        name = "Profil",
-        route = NavRoute.Home.Profile,
-        icon = Icons.Outlined.Person,
-        selectedIcon = Icons.Filled.Person
-    )
-)

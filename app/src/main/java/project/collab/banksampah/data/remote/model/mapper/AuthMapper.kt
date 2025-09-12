@@ -2,8 +2,8 @@ package project.collab.banksampah.data.remote.model.mapper
 
 import project.collab.banksampah.data.remote.model.request.LoginRequestDto
 import project.collab.banksampah.data.remote.model.request.RegisterRequestDto
-import project.collab.banksampah.data.remote.model.response.auth.LoginResponseDto
-import project.collab.banksampah.data.remote.model.response.auth.RegisterResponseDto
+import project.collab.banksampah.data.remote.model.response.auth.login.LoginResponseDto
+import project.collab.banksampah.data.remote.model.response.auth.register.RegisterResponseDto
 import project.collab.banksampah.domain.model.request.LoginRequest
 import project.collab.banksampah.domain.model.request.RegisterRequest
 import project.collab.banksampah.domain.model.response.auth.LoginResponse
@@ -30,7 +30,7 @@ fun RegisterRequest.toDto() : RegisterRequestDto {
 
 fun RegisterResponseDto.toDomain() : RegisterResponse {
     return RegisterResponse(
-        message = message,
+        message = message ?: "",
         status = status
     )
 }
@@ -38,7 +38,8 @@ fun RegisterResponseDto.toDomain() : RegisterResponse {
 fun LoginResponseDto.toDomain() : LoginResponse {
     return LoginResponse(
         status = status,
-        message = message,
-        token = token
+        message = message ?: "",
+        token = token ?: "",
+        userId = id ?: ""
     )
 }

@@ -5,6 +5,7 @@ import project.collab.banksampah.data.local.TokenDataSource
 import project.collab.banksampah.data.remote.api.AuthApiService
 import project.collab.banksampah.data.remote.model.mapper.toDomain
 import project.collab.banksampah.data.remote.model.mapper.toDto
+import project.collab.banksampah.domain.model.LoginInfo
 import project.collab.banksampah.domain.model.User
 import project.collab.banksampah.domain.model.request.LoginRequest
 import project.collab.banksampah.domain.model.request.RegisterRequest
@@ -35,12 +36,13 @@ class AuthRepositoryImpl(
 
         return when (result) {
             is ResponseResult.Success -> {
-                val user = User(
+                val userLoginInfo = LoginInfo(
                     phoneNumber = userLogin.phoneNumber,
-                    token = result.data.token
+                    token = result.data.token ?: "",
+                    userId = result.data.id ?: ""
                 )
 
-                tokenDataSource.saveUserLoginData(data = user)
+                tokenDataSource.saveUserLoginData(data = userLoginInfo)
                 ResponseResult.Success(result.data.toDomain())
             }
             is ResponseResult.Error -> result
