@@ -1,9 +1,11 @@
 package project.collab.banksampah.presentation.feature.auth.login
 
 import android.widget.Toast
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -15,10 +17,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
+import project.collab.banksampah.domain.model.request.LoginRequest
+import project.collab.banksampah.presentation.components.CustomTopBar
+import project.collab.banksampah.presentation.components.LoadingOverlay
 import project.collab.banksampah.presentation.feature.auth.components.AuthHeader
 import project.collab.banksampah.presentation.feature.auth.login.components.LoginForm
-import project.collab.banksampah.domain.model.request.LoginRequest
-import project.collab.banksampah.presentation.components.LoadingOverlay
 import project.collab.banksampah.presentation.theme.Spacing_150
 
 @Composable
@@ -53,23 +56,40 @@ fun LoginScreen(
         }
     }
 
-    LoadingOverlay(
-        isVisible = loginState.isLoading
-    ) {
-        Column(
-            modifier = Modifier.fillMaxSize()
+    Scaffold(
+        topBar = {
+            CustomTopBar()
+        }
+    ) { paddingValues ->
+        LoadingOverlay(
+            isVisible = loginState.isLoading
         ) {
-            AuthHeader(
-                modifier = Modifier.size(Spacing_150),
-                onBackClick = onBackClick)
+            LazyColumn(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .fillMaxSize(),
+            ) {
+                item {
+                    AuthHeader(
+                        modifier = Modifier.size(Spacing_150),
+                        onBackClick = onBackClick
+                    )
+                }
 
-            LoginForm(
-                loginData = loginData,
-                onDataChange = { loginData = it },
-                onLoginClick = { viewModel.login(loginData) },
-                onGoToRegisterClick = onGoToRegisterClick,
-                onForgotPasswordClick = onForgotPasswordClick
-            )
+                item {
+                    LoadingOverlay(
+                        isVisible = loginState.isLoading
+                    ) {
+                        LoginForm(
+                            loginData = loginData,
+                            onDataChange = { loginData = it },
+                            onLoginClick = { viewModel.login(loginData) },
+                            onGoToRegisterClick = onGoToRegisterClick,
+                            onForgotPasswordClick = onForgotPasswordClick
+                        )
+                    }
+                }
+            }
         }
     }
 }

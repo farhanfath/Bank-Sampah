@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material3.MaterialTheme
@@ -29,7 +30,7 @@ import project.collab.banksampah.presentation.theme.Spacing_12
 import project.collab.banksampah.presentation.theme.Spacing_16
 
 @Composable
-fun ColumnScope.LoginForm(
+fun LoginForm(
     loginData: LoginRequest,
     onDataChange: (LoginRequest) -> Unit,
     onLoginClick: () -> Unit,
@@ -38,83 +39,62 @@ fun ColumnScope.LoginForm(
 ) {
     val focusManager = LocalFocusManager.current
 
-    LazyColumn(
+    Column(
+        verticalArrangement = Arrangement.spacedBy(Spacing_16),
         modifier = Modifier
             .padding(horizontal = Spacing_16)
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(Spacing_16)
+            .fillMaxWidth()
     ) {
-        item {
-            Text(
-                text = "Login Akunmu Disini!",
-                style = MaterialTheme.typography.bodyMedium.copy(
-                    textAlign = TextAlign.Left
-                )
+        Text(
+            text = "Login Akunmu Disini!",
+            style = MaterialTheme.typography.bodyMedium.copy(
+                textAlign = TextAlign.Left
             )
-        }
+        )
 
-        item {
-            PhoneTextField(
-                value = loginData.phoneNumber,
-                onValueChange = {
-                    onDataChange(loginData.copy(phoneNumber = it))
-                },
-                keyboardActions = KeyboardActions(
-                    onNext = { focusManager.moveFocus(FocusDirection.Down) }
-                )
+        PhoneTextField(
+            value = loginData.phoneNumber,
+            onValueChange = {
+                onDataChange(loginData.copy(phoneNumber = it))
+            },
+            keyboardActions = KeyboardActions(
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
             )
-        }
+        )
 
-        item {
-            PasswordTextField(
-                value = loginData.password,
-                onValueChange = {
-                    onDataChange(loginData.copy(password = it))
-                },
-                keyboardActions = KeyboardActions(
-                    onDone = { focusManager.clearFocus() }
-                )
+        PasswordTextField(
+            value = loginData.password,
+            onValueChange = {
+                onDataChange(loginData.copy(password = it))
+            },
+            keyboardActions = KeyboardActions(
+                onDone = { focusManager.clearFocus() }
             )
-        }
+        )
 
-        item {
-            val buttonCondition = loginData.phoneNumber.isNotBlank() && loginData.password.isNotBlank()
-            BaseButton(
-                modifier = Modifier.fillMaxWidth(),
-                text = "Masuk",
-                enabled = buttonCondition,
-                onClick = onLoginClick,
-                shape = RoundedCornerShape(Spacing_12)
-            )
-        }
+        val buttonCondition = loginData.phoneNumber.isNotBlank() && loginData.password.isNotBlank()
+        BaseButton(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Masuk",
+            enabled = buttonCondition,
+            onClick = onLoginClick,
+            shape = RoundedCornerShape(Spacing_12)
+        )
 
-        item {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Row {
-                    Text(
-                        text = "Belum Punya Akun? ",
-                        style = MaterialTheme.typography.bodyMedium.copy(
-                            textAlign = TextAlign.Left
-                        )
-                    )
-                    Text(
-                        modifier = Modifier.clickable(onClick = onGoToRegisterClick),
-                        text = "Daftar",
-                        style = MaterialTheme.typography.bodyMedium.copy(
-                            textAlign = TextAlign.Left,
-                            color = PrimaryGreen,
-                            fontWeight = FontWeight.Bold,
-                            textDecoration = TextDecoration.Underline
-                        )
-                    )
-                }
-
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row {
                 Text(
-                    modifier = Modifier.clickable(onClick = onForgotPasswordClick),
-                    text = "Lupa Password?",
+                    text = "Belum Punya Akun? ",
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        textAlign = TextAlign.Left
+                    )
+                )
+                Text(
+                    modifier = Modifier.clickable(onClick = onGoToRegisterClick),
+                    text = "Daftar",
                     style = MaterialTheme.typography.bodyMedium.copy(
                         textAlign = TextAlign.Left,
                         color = PrimaryGreen,
@@ -123,20 +103,17 @@ fun ColumnScope.LoginForm(
                     )
                 )
             }
-        }
-    }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun LoginFormPreview() {
-    Column {
-        LoginForm(
-            loginData = LoginRequest(),
-            onDataChange = {},
-            onLoginClick = {},
-            onGoToRegisterClick = {},
-            onForgotPasswordClick = {}
-        )
+            Text(
+                modifier = Modifier.clickable(onClick = onForgotPasswordClick),
+                text = "Lupa Password?",
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    textAlign = TextAlign.Left,
+                    color = PrimaryGreen,
+                    fontWeight = FontWeight.Bold,
+                    textDecoration = TextDecoration.Underline
+                )
+            )
+        }
     }
 }

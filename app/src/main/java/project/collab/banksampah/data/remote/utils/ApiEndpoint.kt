@@ -22,6 +22,11 @@ object ApiEndpoint {
         const val BY_ID = "/trash/getTypeOfTrashById/{id}"
     }
 
+    object BSU {
+        const val ALL = "/bsu/getAllBSU"
+
+    }
+
     object User {
         const val BY_ID = "/user/getUserById/{id}"
         const val EDIT_USER = ""
