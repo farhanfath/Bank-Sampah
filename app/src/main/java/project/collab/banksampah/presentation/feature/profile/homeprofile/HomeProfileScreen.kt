@@ -15,6 +15,7 @@ import org.koin.androidx.compose.koinViewModel
 import project.collab.banksampah.presentation.feature.profile.homeprofile.components.ProfileHeader
 import project.collab.banksampah.presentation.feature.profile.homeprofile.components.ProfileMenu
 import project.collab.banksampah.presentation.feature.profile.user.UserViewModel
+import project.collab.banksampah.presentation.feature.profile.user.components.shimmer.ProfileHeaderShimmer
 import project.collab.banksampah.presentation.navigation.navigator.HomeProfileNavigator
 import project.collab.banksampah.presentation.theme.Spacing_16
 import project.collab.banksampah.presentation.theme.Spacing_50
@@ -35,10 +36,17 @@ fun HomeProfileScreen(
             .padding(Spacing_16)
             .fillMaxSize()
     ) {
-        ProfileHeader(
-            onUserProfileClick = navigator::navigateToUserProfile,
-            userName = userDataState.userData?.name ?: ""
-        )
+        when {
+            userDataState.isLoading -> {
+                ProfileHeaderShimmer()
+            }
+            userDataState.isDataLoaded -> {
+                ProfileHeader(
+                    onUserProfileClick = navigator::navigateToUserProfile,
+                    userName = userDataState.userData?.name ?: ""
+                )
+            }
+        }
 
         Spacer(modifier = Modifier.size(Spacing_50))
 

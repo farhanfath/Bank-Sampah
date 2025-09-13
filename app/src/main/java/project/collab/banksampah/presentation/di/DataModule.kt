@@ -14,6 +14,8 @@ import project.collab.banksampah.data.remote.api.AuthApiService
 import project.collab.banksampah.data.remote.api.AuthApiServiceImpl
 import project.collab.banksampah.data.remote.api.GalleryApiService
 import project.collab.banksampah.data.remote.api.GalleryApiServiceImpl
+import project.collab.banksampah.data.remote.api.TypeOfTrashApiService
+import project.collab.banksampah.data.remote.api.TypeOfTrashApiServiceImpl
 import project.collab.banksampah.data.remote.api.UserApiService
 import project.collab.banksampah.data.remote.api.UserApiServiceImpl
 import project.collab.banksampah.data.remote.client.HttpClientFactory
@@ -47,5 +49,9 @@ val dataModule = module {
 
     single<GalleryApiService> {
         GalleryApiServiceImpl(httpClient = get())
+    }
+
+    single<TypeOfTrashApiService> {
+        TypeOfTrashApiServiceImpl(httpClient = get())
     }
 }

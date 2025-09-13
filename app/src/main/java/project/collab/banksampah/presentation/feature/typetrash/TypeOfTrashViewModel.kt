@@ -1,4 +1,4 @@
-package project.collab.banksampah.presentation.feature.gallery
+package project.collab.banksampah.presentation.feature.typetrash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,26 +7,26 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import project.collab.banksampah.domain.usecase.GalleryUseCase
+import project.collab.banksampah.domain.usecase.TypeOfTrashUseCase
 import project.collab.banksampah.domain.utils.onError
 import project.collab.banksampah.domain.utils.onSuccess
 
-class GalleryViewModel (
-    private val galleryUseCase: GalleryUseCase
+class TypeOfTrashViewModel (
+    private val typeOfTrashUseCase: TypeOfTrashUseCase
 ) : ViewModel() {
 
-    private val _galleryDetailState = MutableStateFlow(GalleryUiState())
-    val galleryDetailState = _galleryDetailState.asStateFlow()
+    private val _typeOfTrashDetailState = MutableStateFlow(TypeOfTrashUiState())
+    val typeOfTrashDetailState = _typeOfTrashDetailState.asStateFlow()
 
-    val galleries = galleryUseCase.getGalleryList()
+    val typeOfTrashes = typeOfTrashUseCase.getTypeOfTrashList()
         .cachedIn(viewModelScope)
 
-    fun getGalleryById(id: String) {
-        _galleryDetailState.update { it.copy(isLoading = true) }
+    fun getTypeOfTrashById(id: String) {
+        _typeOfTrashDetailState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
-            galleryUseCase.getGalleryById(id)
+            typeOfTrashUseCase.getTypeOfTrashById(id)
                 .onSuccess {
-                    _galleryDetailState.update {
+                    _typeOfTrashDetailState.update {
                         it.copy(
                             isLoading = false,
                             data = it.data
@@ -34,7 +34,7 @@ class GalleryViewModel (
                     }
                 }
                 .onError { error ->
-                    _galleryDetailState.update {
+                    _typeOfTrashDetailState.update {
                         it.copy(
                             isLoading = false,
                             error = error.message
@@ -43,5 +43,4 @@ class GalleryViewModel (
                 }
         }
     }
-
 }

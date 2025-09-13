@@ -15,26 +15,12 @@ import project.collab.banksampah.domain.usecase.AuthUseCase
 import project.collab.banksampah.domain.usecase.AuthUseCaseImpl
 import project.collab.banksampah.domain.usecase.GalleryUseCase
 import project.collab.banksampah.domain.usecase.GalleryUserCaseImpl
+import project.collab.banksampah.domain.usecase.TypeOfTrashUseCase
+import project.collab.banksampah.domain.usecase.TypeOfTrashUseCaseImpl
 import project.collab.banksampah.domain.usecase.UserUseCase
 import project.collab.banksampah.domain.usecase.UserUseCaseImpl
 
-val domainModule = module {
-    single<AuthRepository> {
-        AuthRepositoryImpl(authApiService = get(), tokenDataSource = get())
-    }
-
-    single<ArticleRepository> {
-        ArticleRepositoryImpl(apiService = get())
-    }
-
-    single<UserRepository> {
-        UserRepositoryImpl(userApiService = get(), tokenDataSource = get())
-    }
-
-    single<GalleryRepository> {
-        GalleryRepositoryImpl(apiService = get())
-    }
-
+val useCaseModule = module {
     factory<AuthUseCase> {
         AuthUseCaseImpl(authRepository = get())
     }
@@ -49,5 +35,9 @@ val domainModule = module {
 
     factory<GalleryUseCase> {
         GalleryUserCaseImpl(galleryRepository = get())
+    }
+
+    factory<TypeOfTrashUseCase> {
+        TypeOfTrashUseCaseImpl(typeOfTrashRepository = get())
     }
 }

@@ -7,6 +7,7 @@ import project.collab.banksampah.presentation.feature.auth.login.LoginViewModel
 import project.collab.banksampah.presentation.feature.auth.register.RegisterViewModel
 import project.collab.banksampah.presentation.feature.gallery.GalleryViewModel
 import project.collab.banksampah.presentation.feature.profile.user.UserViewModel
+import project.collab.banksampah.presentation.feature.typetrash.TypeOfTrashViewModel
 
 val viewModelModule = module {
     viewModel { LoginViewModel(authUseCase = get()) }
@@ -15,4 +16,5 @@ val viewModelModule = module {
     viewModel { ArticleViewModel(articleUseCase = get()) }
     viewModel { UserViewModel(get(),get()) }
     viewModel { GalleryViewModel(galleryUseCase = get()) }
+    viewModel { TypeOfTrashViewModel(typeOfTrashUseCase = get()) }
 }

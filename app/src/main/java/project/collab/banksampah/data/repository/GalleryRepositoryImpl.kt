@@ -2,8 +2,6 @@ package project.collab.banksampah.data.repository
 
 import project.collab.banksampah.data.remote.api.GalleryApiService
 import project.collab.banksampah.data.remote.model.mapper.toDomain
-import project.collab.banksampah.data.remote.model.response.gallery.GalleryDetailResponseDto
-import project.collab.banksampah.data.remote.model.response.gallery.GalleryListResponseDto
 import project.collab.banksampah.domain.model.response.gallery.Gallery
 import project.collab.banksampah.domain.repository.GalleryRepository
 import project.collab.banksampah.domain.utils.ResponseResult

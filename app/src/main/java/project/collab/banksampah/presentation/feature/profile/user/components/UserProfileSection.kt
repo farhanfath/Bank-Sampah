@@ -1,5 +1,6 @@
 package project.collab.banksampah.presentation.feature.profile.user.components
 
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.CameraAlt
@@ -28,6 +30,7 @@ import project.collab.banksampah.presentation.theme.PrimaryGreen
 import project.collab.banksampah.presentation.theme.PrimaryRed
 import project.collab.banksampah.presentation.theme.Size_100
 import project.collab.banksampah.presentation.theme.Size_12
+import project.collab.banksampah.presentation.theme.Size_150
 import project.collab.banksampah.presentation.theme.Size_20
 import project.collab.banksampah.presentation.theme.Size_30
 import project.collab.banksampah.presentation.theme.Spacing_10
@@ -84,10 +87,16 @@ fun UserProfileSection(
                     fontWeight = FontWeight.Bold
                 )
             )
-            Text(
-                text = "ID: ${userData.userId}",
-                style = MaterialTheme.typography.bodySmall
-            )
+            Box(
+                modifier = Modifier.width(Size_100)
+            ) {
+                Text(
+                    modifier = Modifier.basicMarquee(),
+                    text = "ID: ${userData.userId}",
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+
             Text(
                 text = "Cabang BSU: ${userData.bsuBranchCode}",
                 style = MaterialTheme.typography.bodySmall

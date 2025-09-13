@@ -21,6 +21,5 @@ fun GalleryListResponseDto.toDomain() : GalleryListResult {
     return GalleryListResult(
         galleries = this.data.gallery.map { it.toDomain() },
         pagination = this.data.pagination.toDomain()
-
     )
 }

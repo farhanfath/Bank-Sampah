@@ -30,6 +30,7 @@ class GalleryUserCaseImpl(
         ).flow
     }
 
-    override suspend fun getGalleryById(id: String): ResponseResult<Gallery> = galleryRepository.getGalleryById(id)
+    override suspend fun getGalleryById(id: String): ResponseResult<Gallery> =
+        galleryRepository.getGalleryById(id)
 
 }

@@ -17,6 +17,11 @@ object ApiEndpoint {
         const val BY_ID = "/gallery/getGalleryById/{id}"
     }
 
+    object TypeTrash {
+        const val ALL = "/trash/getAllTypeOfTrash"
+        const val BY_ID = "/trash/getTypeOfTrashById/{id}"
+    }
+
     object User {
         const val BY_ID = "/user/getUserById/{id}"
         const val EDIT_USER = ""
