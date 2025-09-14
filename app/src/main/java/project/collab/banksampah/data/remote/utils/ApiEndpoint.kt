@@ -24,15 +24,20 @@ object ApiEndpoint {
 
     object BSU {
         const val ALL = "/bsu/getAllBSU"
+        const val BY_ID = "/bsu/getBSUById/{id}"
+    }
 
+    object Schedule {
+        const val ALL = "/schedule/getAllSchedule"
+        const val BY_ID = "/schedule/getScheduleById/{id}"
     }
 
     object User {
         const val BY_ID = "/user/getUserById/{id}"
-        const val EDIT_USER = ""
-        const val CHANGE_PASSWORD = ""
-        const val ALL_USER_TRASH_EXCHANGE_HISTORY = ""
-        const val USER_TRASH_EXHCANGE_HISTORY_BY_ID = ""
-        const val REQUEST_POINT_EXCHANGE = ""
+        const val EDIT_USER = "/user/editUser/{id}"
+        const val CHANGE_PASSWORD = "/user/changePasswordUser/{userId}"
+        const val ALL_USER_TRASH_EXCHANGE_HISTORY = "/user/getUserTrashExchangeHistory/{userId}"
+        const val USER_TRASH_EXCHANGE_HISTORY_BY_ID = "/user/getUserTrashExchangeHistory/{userId}/{trashExchangeId}"
+        const val REQUEST_POINT_EXCHANGE = "/point/request"
     }
 }

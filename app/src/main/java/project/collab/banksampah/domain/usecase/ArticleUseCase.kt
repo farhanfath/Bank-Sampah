@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
-import project.collab.banksampah.data.paging.ArticlesPagingSource
+import project.collab.banksampah.data.paging.GenericPagingSource
 import project.collab.banksampah.domain.model.response.article.Article
 import project.collab.banksampah.domain.repository.ArticleRepository
 import project.collab.banksampah.domain.utils.ResponseResult
@@ -25,7 +25,9 @@ class ArticleUseCaseImpl(
                 initialLoadSize = 10
             ),
             pagingSourceFactory = {
-                ArticlesPagingSource(articleRepository, articleTitle)
+                GenericPagingSource { page, pageSize ->
+                    articleRepository.getArticlesList(page, pageSize, articleTitle)
+                }
             }
         ).flow
     }

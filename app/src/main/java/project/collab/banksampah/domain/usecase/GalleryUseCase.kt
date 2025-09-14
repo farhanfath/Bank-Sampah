@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
-import project.collab.banksampah.data.paging.GalleriesPagingSource
+import project.collab.banksampah.data.paging.GenericPagingSource
 import project.collab.banksampah.domain.model.response.gallery.Gallery
 import project.collab.banksampah.domain.repository.GalleryRepository
 import project.collab.banksampah.domain.utils.ResponseResult
@@ -25,7 +25,9 @@ class GalleryUserCaseImpl(
                 initialLoadSize = 10
             ),
             pagingSourceFactory = {
-                GalleriesPagingSource(galleryRepository, galleryTitle)
+                GenericPagingSource { page, pageSize ->
+                    galleryRepository.getGalleriesList(page, pageSize, galleryTitle)
+                }
             }
         ).flow
     }

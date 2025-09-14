@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
-import project.collab.banksampah.data.paging.TypeOfTrashPagingSource
+import project.collab.banksampah.data.paging.GenericPagingSource
 import project.collab.banksampah.domain.model.response.type_trash.TypeOfTrash
 import project.collab.banksampah.domain.repository.TypeOfTrashRepository
 import project.collab.banksampah.domain.utils.ResponseResult
@@ -25,8 +25,9 @@ class TypeOfTrashUseCaseImpl(
                 initialLoadSize = 10
             ),
             pagingSourceFactory = {
-                TypeOfTrashPagingSource(typeOfTrashRepository, trashType)
-
+                GenericPagingSource { page, pageSize ->
+                    typeOfTrashRepository.getTypeOfTrashList(page, pageSize, trashType)
+                }
             }
         ).flow
     }
