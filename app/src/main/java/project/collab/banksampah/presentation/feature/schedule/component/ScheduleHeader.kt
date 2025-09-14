@@ -106,7 +106,9 @@ fun ScheduleHeader(
             shape = RoundedCornerShape(12.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = PrimaryGreen,
-                unfocusedBorderColor = Color(0xFFE0E0E0)
+                unfocusedBorderColor = Color(0xFFE0E0E0),
+                unfocusedContainerColor = Color.White,
+                focusedContainerColor = Color.White
             ),
             singleLine = true
         )
