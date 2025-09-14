@@ -6,4 +6,5 @@ data class ArticleUiState(
     val isLoading: Boolean = false,
     val data: Article? = null,
     val error: String? = null,
+    val searchQuery : String = ""
 )

@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -22,20 +23,20 @@ import project.collab.banksampah.domain.utils.onSuccess
 class ArticleViewModel(
     private val articleUseCase: ArticleUseCase
 ) : ViewModel() {
-    private val _searchQuery = MutableStateFlow<String?>(null)
-    val searchQuery: StateFlow<String?> = _searchQuery.asStateFlow()
-
     // article detail state (article by id)
     private val _articleDetailState = MutableStateFlow(ArticleUiState())
     val articleDetailState = _articleDetailState.asStateFlow()
 
-    // for paging article data
-    val articles : Flow<PagingData<Article>> = articleUseCase.getArticlesList()
-        .cachedIn(viewModelScope)
+    private val _uiState = MutableStateFlow(ArticleUiState())
+    val uiState = _uiState.asStateFlow()
 
+    private val _searchQuery = MutableStateFlow<String?>(null)
+
+    // for paging article data
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-    val searchedArticles: Flow<PagingData<Article>> = searchQuery
+    val articles: Flow<PagingData<Article>> = _searchQuery
         .debounce(300)
+        .distinctUntilChanged()
         .flatMapLatest { query ->
             articleUseCase.getArticlesList(query)
         }
@@ -66,5 +67,19 @@ class ArticleViewModel(
                     }
                 }
         }
+    }
+
+    fun updateSearchQuery(query: String) {
+        _uiState.update { it.copy(searchQuery = query) }
+        _searchQuery.value = query.ifBlank { null }
+    }
+
+    fun clearSearch() {
+        _uiState.update {
+            it.copy(
+                searchQuery = ""
+            )
+        }
+        _searchQuery.value = null
     }
 }
