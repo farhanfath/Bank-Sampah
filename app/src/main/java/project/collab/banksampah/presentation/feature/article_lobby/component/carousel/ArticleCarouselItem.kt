@@ -33,7 +33,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import project.collab.banksampah.domain.model.response.article.Article
-import project.collab.banksampah.getArticlesList
 import project.collab.banksampah.presentation.components.base.BaseImage
 import project.collab.banksampah.presentation.theme.Size_200
 import project.collab.banksampah.presentation.theme.Spacing_12
@@ -163,20 +162,5 @@ fun DotsIndicator(
                     .animateItem()
             )
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ArticleCarouselPreview(modifier: Modifier = Modifier) {
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        val articles = getArticlesList()
-        ArticleCarousel(
-            articles = articles,
-            onArticleClick = { article ->
-            }
-        )
     }
 }

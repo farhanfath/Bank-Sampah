@@ -3,15 +3,22 @@ package project.collab.banksampah.presentation.feature.gallery
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,30 +27,48 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import org.koin.compose.viewmodel.koinViewModel
 import project.collab.banksampah.domain.model.response.gallery.Gallery
 import project.collab.banksampah.presentation.components.base.BaseShimmer
+import project.collab.banksampah.presentation.components.base.rememberVisibilityState
 import project.collab.banksampah.presentation.feature.gallery.component.GalleryCard
+import project.collab.banksampah.presentation.feature.gallery.component.GalleryFullscreenDialog
+import project.collab.banksampah.presentation.theme.PrimaryGreen
 import project.collab.banksampah.presentation.theme.Size_100
 import project.collab.banksampah.presentation.theme.Spacing_10
 import project.collab.banksampah.presentation.theme.Spacing_12
+import project.collab.banksampah.presentation.theme.Spacing_20
 import project.collab.banksampah.presentation.theme.Spacing_30
+import project.collab.banksampah.presentation.theme.Spacing_50
 import project.collab.banksampah.presentation.utils.handlePagingAppendState
 import project.collab.banksampah.presentation.utils.handlePagingState
+import project.collab.banksampah.presentation.utils.hide
+import project.collab.banksampah.presentation.utils.show
 
 @Composable
 fun GalleryScreen(
-    galleryViewModel: GalleryViewModel = koinViewModel(),
-    onClick: (Gallery) -> Unit
+    galleryViewModel: GalleryViewModel = koinViewModel()
 ) {
     val patternHeights = listOf(220.dp, 280.dp, 200.dp, 260.dp)
 
     val galleries = galleryViewModel.galleries.collectAsLazyPagingItems()
+
+    var selectedImageGallery by remember { mutableStateOf<Gallery?>(null) }
+    val galleryFullScreenState = rememberVisibilityState()
 
     Column(modifier = Modifier.fillMaxSize()) {
         Text(
             text = "Galeri Kegiatan",
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(horizontal = Spacing_30, vertical = Spacing_30)
+            modifier = Modifier.padding(start = Spacing_30, end = Spacing_30, top = Spacing_30, bottom = Spacing_20)
         )
+
+        HorizontalDivider(
+            modifier = Modifier
+                .padding(horizontal = Spacing_10)
+                .fillMaxWidth(),
+            color = PrimaryGreen
+        )
+
+        Spacer(modifier = Modifier.size(Spacing_30))
 
         LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Fixed(2),
@@ -82,7 +107,10 @@ fun GalleryScreen(
                             GalleryCard(
                                 item = gallery,
                                 height = height,
-                                onClick = { onClick(gallery) }
+                                onClick = {
+                                    selectedImageGallery = gallery
+                                    galleryFullScreenState.show()
+                                }
                             )
                         }
                     }
@@ -110,12 +138,14 @@ fun GalleryScreen(
         }
     }
 
-}
-
-@Preview
-@Composable
-private fun PreviewGalleryScreen() {
-    GalleryScreen(
-        onClick = {}
-    )
+    selectedImageGallery?.let { gallery ->
+        GalleryFullscreenDialog(
+            gallery = gallery,
+            isVisible = galleryFullScreenState.value,
+            onDismiss = {
+                selectedImageGallery = null
+                galleryFullScreenState.hide()
+            },
+        )
+    }
 }

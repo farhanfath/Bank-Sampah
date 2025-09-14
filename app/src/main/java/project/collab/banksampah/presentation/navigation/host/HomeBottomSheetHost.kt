@@ -59,9 +59,7 @@ fun HomeBottomSheetHost(
             }
 
             composable<NavRoute.Home.Gallery> {
-                GalleryScreen(
-                    onClick = {}
-                )
+                GalleryScreen()
             }
 
             composable<NavRoute.Home.TypeTrash> {

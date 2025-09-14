@@ -1,7 +1,5 @@
 package project.collab.banksampah
 
-import project.collab.banksampah.domain.model.response.article.Article
-import project.collab.banksampah.domain.model.response.gallery.Gallery
 import project.collab.banksampah.presentation.feature.profile.historyRedeemTrash.state.RedeemTrashHistoryData
 import project.collab.banksampah.presentation.feature.profile.historyRedeemTrash.state.RedeemTrashHistoryResponse
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.state.HistoryRedeemPointData
@@ -44,44 +42,6 @@ fun getRedeemTrashHistoryResponse() : RedeemTrashHistoryResponse {
                 date = "26/10/25",
                 totalPoint = "100.000"
             ),
-        )
-    )
-}
-
-fun getArticlesList() : List<Article> {
-    return listOf(
-        Article(
-            id = "12qwdwq",
-            title = "Hello world",
-            coverImageFileName = "wdqwd",
-            coverImageUrl = "dqdwqdwq",
-            imageFileNames = listOf("wdqwdwq", "dwqdqw"),
-            imageUrls = listOf("wqd", "wdwqdwq"),
-            description = "wqddqwdq",
-            editor = "farhan",
-            timestamp = "10 September 2025"
-        ),
-        Article(
-            id = "12qwdwq",
-            title = "Hello world",
-            coverImageFileName = "wdqwd",
-            coverImageUrl = "dqdwqdwq",
-            imageFileNames = listOf("wdqwdwq", "dwqdqw"),
-            imageUrls = listOf("wqd", "wdwqdwq"),
-            description = "wqddqwdq",
-            editor = "farhan",
-            timestamp = "10 September 2025"
-        ),
-        Article(
-            id = "12qwdwq",
-            title = "Hello world",
-            coverImageFileName = "wdqwd",
-            coverImageUrl = "dqdwqdwq",
-            imageFileNames = listOf("wdqwdwq", "dwqdqw"),
-            imageUrls = listOf("wqd", "wdwqdwq"),
-            description = "wqddqwdq",
-            editor = "farhan",
-            timestamp = "10 September 2025"
         )
     )
 }
