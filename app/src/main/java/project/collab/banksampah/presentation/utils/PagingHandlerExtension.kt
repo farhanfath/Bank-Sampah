@@ -52,3 +52,17 @@ fun <T : Any> HandleComposePagingState(
         is LoadState.NotLoading -> onSuccess()
     }
 }
+
+@Composable
+fun <T : Any> HandleComposePagingAppendState(
+    items: LazyPagingItems<T>,
+    onLoading: @Composable () -> Unit,
+    onError: @Composable (Throwable) -> Unit,
+    onNotLoading: @Composable () -> Unit = {}
+) {
+    when (val state = items.loadState.append) {
+        is LoadState.Loading -> onLoading()
+        is LoadState.Error -> onError(state.error)
+        is LoadState.NotLoading -> onNotLoading()
+    }
+}

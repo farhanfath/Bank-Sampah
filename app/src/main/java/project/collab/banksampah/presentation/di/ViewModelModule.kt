@@ -11,7 +11,7 @@ import project.collab.banksampah.presentation.feature.typetrash.TypeOfTrashViewM
 
 val viewModelModule = module {
     viewModel { LoginViewModel(authUseCase = get()) }
-    viewModel { RegisterViewModel(authUseCase = get()) }
+    viewModel { RegisterViewModel(authUseCase = get(), bsuUseCase = get()) }
 
     viewModel { ArticleViewModel(articleUseCase = get()) }
     viewModel { UserViewModel(get(),get()) }

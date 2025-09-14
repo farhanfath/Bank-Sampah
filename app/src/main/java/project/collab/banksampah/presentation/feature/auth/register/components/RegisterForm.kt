@@ -29,13 +29,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.paging.compose.LazyPagingItems
 import project.collab.banksampah.domain.model.request.RegisterRequest
+import project.collab.banksampah.domain.model.response.bsu.Bsu
 import project.collab.banksampah.presentation.components.base.AddressTextField
 import project.collab.banksampah.presentation.components.base.BaseButton
 import project.collab.banksampah.presentation.components.base.BaseTextField
 import project.collab.banksampah.presentation.components.base.NikTextField
 import project.collab.banksampah.presentation.components.base.PasswordTextField
 import project.collab.banksampah.presentation.components.base.PhoneTextField
+import project.collab.banksampah.presentation.feature.auth.register.BsuDropdownState
 import project.collab.banksampah.presentation.theme.AccentGrey
 import project.collab.banksampah.presentation.theme.PrimaryGreen
 import project.collab.banksampah.presentation.theme.Size_20
@@ -46,7 +49,12 @@ import project.collab.banksampah.presentation.theme.Spacing_30
 @Composable
 fun RegisterForm(
     registerData: RegisterRequest,
+    bsuDropdownState: BsuDropdownState,
+    bsuPagingItems: LazyPagingItems<Bsu>,
     onDataChange: (RegisterRequest) -> Unit,
+    onBsuSearchChange: (String) -> Unit,
+    onBsuSelect: (Bsu) -> Unit,
+    onBsuDropdownExpandChange: (Boolean) -> Unit,
     onRegisterClick: () -> Unit,
     onGoToLoginClick: () -> Unit
 ) {
@@ -119,52 +127,18 @@ fun RegisterForm(
             )
         )
 
-        BaseTextField(
-            hint = "Cabang BSU",
-            value = registerData.bsuBranchName,
-            onValueChange = {
-                onDataChange(registerData.copy(bsuBranchName = it))
+        SearchableBsuDropDown(
+            state = bsuDropdownState,
+            bsuPagingItems = bsuPagingItems,
+            onSearchQueryChange = onBsuSearchChange,
+            onBsuSelect = { bsu ->
+                onBsuSelect(bsu)
+                onDataChange(registerData.copy(
+                    bsuBranchName = bsu.bsuBranchName,
+                    bsuBranchCode = bsu.bsuBranchCode
+                ))
             },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Next,
-                capitalization = KeyboardCapitalization.Words
-            ),
-            keyboardActions = KeyboardActions(
-                onNext = { focusManager.moveFocus(FocusDirection.Down) }
-            ),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Business,
-                    contentDescription = "Branch",
-                    tint = AccentGrey,
-                    modifier = Modifier.size(Size_20)
-                )
-            }
-        )
-
-        BaseTextField(
-            hint = "Kode Cabang BSU",
-            value = registerData.bsuBranchCode,
-            onValueChange = {
-                onDataChange(registerData.copy(bsuBranchCode = it))
-            },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Next,
-                capitalization = KeyboardCapitalization.Words
-            ),
-            keyboardActions = KeyboardActions(
-                onNext = { focusManager.moveFocus(FocusDirection.Down) }
-            ),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Business,
-                    contentDescription = "Branch",
-                    tint = AccentGrey,
-                    modifier = Modifier.size(Size_20)
-                )
-            }
+            onExpandedChange = onBsuDropdownExpandChange,
         )
 
         PasswordTextField(
@@ -206,18 +180,5 @@ fun RegisterForm(
         }
 
         Spacer(modifier = Modifier.size(Spacing_30))
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun RegisterFormPreview() {
-    Column {
-        RegisterForm(
-            registerData = RegisterRequest(),
-            onDataChange = {},
-            onRegisterClick = {},
-            onGoToLoginClick = {}
-        )
     }
 }

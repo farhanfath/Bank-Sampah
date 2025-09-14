@@ -63,6 +63,7 @@ fun BaseTextField(
     maxLines: Int = 1,
     minLines: Int = 1,
     shape: Shape = RoundedCornerShape(Spacing_12),
+    readOnly: Boolean = false,
     contentPadding: PaddingValues = TextFieldDefaults.contentPaddingWithLabel()
 ) {
     Column(modifier = modifier) {
@@ -121,7 +122,8 @@ fun BaseTextField(
                 disabledPlaceholderColor = AccentGrey.copy(alpha = 0.5f)
             ),
             keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions
+            keyboardActions = keyboardActions,
+            readOnly = readOnly
         )
 
         if (isError && !errorMessage.isNullOrBlank()) {

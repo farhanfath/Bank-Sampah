@@ -12,8 +12,12 @@ import project.collab.banksampah.data.remote.api.ArticleApiService
 import project.collab.banksampah.data.remote.api.ArticleApiServiceImpl
 import project.collab.banksampah.data.remote.api.AuthApiService
 import project.collab.banksampah.data.remote.api.AuthApiServiceImpl
+import project.collab.banksampah.data.remote.api.BsuApiService
+import project.collab.banksampah.data.remote.api.BsuApiServiceImpl
 import project.collab.banksampah.data.remote.api.GalleryApiService
 import project.collab.banksampah.data.remote.api.GalleryApiServiceImpl
+import project.collab.banksampah.data.remote.api.ScheduleApiService
+import project.collab.banksampah.data.remote.api.ScheduleApiServiceImpl
 import project.collab.banksampah.data.remote.api.TypeOfTrashApiService
 import project.collab.banksampah.data.remote.api.TypeOfTrashApiServiceImpl
 import project.collab.banksampah.data.remote.api.UserApiService
@@ -53,5 +57,13 @@ val dataModule = module {
 
     single<TypeOfTrashApiService> {
         TypeOfTrashApiServiceImpl(httpClient = get())
+    }
+
+    single<BsuApiService> {
+        BsuApiServiceImpl(httpClient = get())
+    }
+
+    single<ScheduleApiService> {
+        ScheduleApiServiceImpl(get())
     }
 }
