@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,7 +33,8 @@ import project.collab.banksampah.presentation.theme.PrimaryGreen
 fun TrashTypesHeader(
     searchQuery: String,
     onSearchQueryChange: (String) -> Unit,
-    onRefresh: () -> Unit
+    onRefresh: () -> Unit,
+    onClearSearch: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -80,6 +82,17 @@ fun TrashTypesHeader(
                     contentDescription = "Search",
                     tint = Color.Gray
                 )
+            },
+            trailingIcon = {
+                if (searchQuery.isNotBlank()) {
+                    IconButton(onClick = onClearSearch) {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = "Clear search",
+                            tint = Color.Gray
+                        )
+                    }
+                }
             },
             shape = RoundedCornerShape(12.dp),
             colors = OutlinedTextFieldDefaults.colors(

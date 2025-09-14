@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.paging.compose.collectAsLazyPagingItems
 import org.koin.compose.viewmodel.koinViewModel
 import project.collab.banksampah.domain.model.response.schedule.Schedule
+import project.collab.banksampah.presentation.components.CommonEmptyState
 import project.collab.banksampah.presentation.components.base.rememberVisibilityState
-import project.collab.banksampah.presentation.feature.schedule.component.EmptyScheduleState
 import project.collab.banksampah.presentation.feature.schedule.component.ErrorScheduleState
 import project.collab.banksampah.presentation.feature.schedule.component.FilterSection
 import project.collab.banksampah.presentation.feature.schedule.component.ScheduleCard
@@ -55,7 +55,7 @@ fun ScheduleScreen(
             ScheduleHeader(
                 searchQuery = uiState.searchQuery,
                 onSearchQueryChange = scheduleViewModel::updateSearchQuery,
-                onRefresh = { schedules.refresh() },
+                onRefresh = schedules::refresh,
                 onClearSearch = scheduleViewModel::clearSearch
             )
         }
@@ -80,7 +80,7 @@ fun ScheduleScreen(
                 when {
                     schedules.itemCount == 0 -> {
                         item {
-                            EmptyScheduleState(
+                            CommonEmptyState(
                                 message = if (uiState.searchQuery.isNotBlank()) {
                                     "Tidak ada jadwal untuk \"${uiState.searchQuery}\""
                                 } else {
@@ -91,7 +91,7 @@ fun ScheduleScreen(
                     }
                     filteredSchedules.isEmpty() && uiState.selectedStatus != ScheduleStatus.ALL -> {
                         item {
-                            EmptyScheduleState(
+                            CommonEmptyState(
                                 message = "Tidak ada jadwal dengan status \"${uiState.selectedStatus.displayName}\""
                             )
                         }
@@ -124,7 +124,7 @@ fun ScheduleScreen(
                 item {
                     ErrorScheduleState(
                         message = "Gagal memuat jadwal",
-                        onRetry = { schedules.retry() }
+                        onRetry = schedules::retry
                     )
                 }
             }
