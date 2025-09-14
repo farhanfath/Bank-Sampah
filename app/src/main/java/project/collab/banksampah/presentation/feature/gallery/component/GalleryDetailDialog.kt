@@ -56,6 +56,7 @@ import coil3.request.ImageRequest
 import coil3.request.crossfade
 import project.collab.banksampah.domain.model.response.gallery.Gallery
 import project.collab.banksampah.presentation.components.base.BaseDialog
+import project.collab.banksampah.presentation.components.base.BaseImage
 import project.collab.banksampah.presentation.utils.toFormattedDateTime
 
 @Composable
@@ -79,9 +80,6 @@ fun GalleryFullscreenDialog(
                 .background(Color.Black)
                 .systemBarsPadding()
         ) {
-            // Background blur effect when image is loading
-            var isImageLoading by remember { mutableStateOf(true) }
-
             // Main content
             Column(
                 modifier = Modifier.fillMaxSize()
@@ -155,12 +153,8 @@ fun GalleryFullscreenDialog(
                         }
                     }
 
-                    AsyncImage(
-                        model = ImageRequest.Builder(LocalContext.current)
-                            .data(gallery.fileURL)
-                            .crossfade(true)
-                            .build(),
-                        contentDescription = gallery.imgTitle,
+                    BaseImage(
+                        image = gallery.fileURL,
                         modifier = Modifier
                             .fillMaxSize()
                             .graphicsLayer(
@@ -187,18 +181,7 @@ fun GalleryFullscreenDialog(
                                 )
                             },
                         contentScale = ContentScale.Fit,
-                        onLoading = { isImageLoading = true },
-                        onSuccess = { isImageLoading = false },
-                        onError = { isImageLoading = false }
                     )
-
-                    // Loading indicator
-                    if (isImageLoading) {
-                        CircularProgressIndicator(
-                            color = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(40.dp)
-                        )
-                    }
 
                     // Zoom indicator
                     if (scale > 1f) {
