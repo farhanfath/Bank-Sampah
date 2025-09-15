@@ -30,6 +30,7 @@ import project.collab.banksampah.presentation.theme.Size_2
 import project.collab.banksampah.presentation.theme.Size_50
 import project.collab.banksampah.presentation.theme.Spacing_10
 import project.collab.banksampah.presentation.theme.Spacing_12
+import project.collab.banksampah.presentation.theme.Spacing_30
 import project.collab.banksampah.presentation.theme.Spacing_4
 
 @Composable
@@ -53,7 +54,7 @@ fun ProfileHeader(
             shape = RoundedCornerShape(Spacing_12)
         ) {
             Row(
-                modifier = Modifier.padding(Spacing_10),
+                modifier = Modifier.padding(start = Spacing_10, top = Spacing_10, bottom = Spacing_10, end = Spacing_30),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(

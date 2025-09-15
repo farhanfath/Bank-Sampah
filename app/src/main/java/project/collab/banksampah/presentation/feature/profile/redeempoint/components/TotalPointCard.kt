@@ -19,7 +19,9 @@ import project.collab.banksampah.presentation.theme.Spacing_12
 import project.collab.banksampah.presentation.theme.Spacing_16
 
 @Composable
-fun ColumnScope.TotalPointCard() {
+fun ColumnScope.TotalPointCard(
+    totalPoint: Int
+) {
     BaseCard(
         modifier = Modifier.align(Alignment.End)
     ) {
@@ -40,7 +42,7 @@ fun ColumnScope.TotalPointCard() {
                 )
 
                 Text(
-                    text = "100.000",
+                    text = "$totalPoint",
                     style = MaterialTheme.typography.bodyMedium
                 )
             }

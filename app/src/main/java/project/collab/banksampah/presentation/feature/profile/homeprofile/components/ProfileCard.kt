@@ -22,7 +22,6 @@ import project.collab.banksampah.presentation.components.base.BaseImage
 import project.collab.banksampah.presentation.theme.PrimaryGreen
 import project.collab.banksampah.presentation.theme.Size_150
 import project.collab.banksampah.presentation.theme.Size_200
-import project.collab.banksampah.presentation.theme.Size_220
 import project.collab.banksampah.presentation.theme.Size_30
 import project.collab.banksampah.presentation.theme.Size_75
 import project.collab.banksampah.presentation.theme.Spacing_12

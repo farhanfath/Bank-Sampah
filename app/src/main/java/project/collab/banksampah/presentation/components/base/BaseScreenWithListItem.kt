@@ -13,12 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import project.collab.banksampah.presentation.theme.Spacing_10
 import project.collab.banksampah.presentation.theme.Spacing_16
 import project.collab.banksampah.presentation.theme.Spacing_4
 
 @Composable
 fun <T> BaseScreenWithListItem(
+    modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
     title: String,
     subTitle: String,
@@ -26,7 +28,7 @@ fun <T> BaseScreenWithListItem(
     itemContent: @Composable (T) -> Unit
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .padding(horizontal = Spacing_16, vertical = Spacing_4)
             .fillMaxSize(),
     ) {
@@ -34,7 +36,8 @@ fun <T> BaseScreenWithListItem(
             title = title,
             textStyle = MaterialTheme.typography.headlineSmall.copy(
                 color = Color.Black,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
             ),
             onBackClick = onBackClick
         )

@@ -4,11 +4,10 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
 import project.collab.banksampah.data.remote.model.response.gallery.GalleryDetailResponseDto
 import project.collab.banksampah.data.remote.model.response.gallery.GalleryListResponseDto
 import project.collab.banksampah.data.remote.utils.ApiEndpoint
+import project.collab.banksampah.data.remote.utils.replacePlaceholders
 import project.collab.banksampah.data.remote.utils.safeApiCall
 import project.collab.banksampah.domain.utils.ResponseResult
 
@@ -44,11 +43,10 @@ class GalleryApiServiceImpl(
 
     override suspend fun getGalleryById(id: String): ResponseResult<GalleryDetailResponseDto> {
         return safeApiCall {
-            val response : GalleryDetailResponseDto = httpClient.get(
-                ApiEndpoint.Gallery.BY_ID.replace("{id}", id)
-            ) {
-                contentType(ContentType.Application.Json)
-            }.body()
+            val url = ApiEndpoint.Gallery.BY_ID.replacePlaceholders(
+                "id" to id
+            )
+            val response : GalleryDetailResponseDto = httpClient.get(url).body()
             response
         }
     }

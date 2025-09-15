@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import project.collab.banksampah.presentation.feature.schedule.ScheduleStatus
 import project.collab.banksampah.presentation.feature.schedule.util.getTimeRemaining
-import project.collab.banksampah.presentation.utils.toFormattedFullDateTime
+import project.collab.banksampah.presentation.utils.toFormattedDate
 import project.collab.banksampah.presentation.utils.toFormattedTime
 
 // Time Details Section
@@ -40,7 +40,7 @@ fun TimeDetailsSection(
         TimeCard(
             label = "Waktu Buka",
             time = openAt.toFormattedTime(),
-            fullDateTime = openAt.toFormattedFullDateTime(),
+            fullDateTime = openAt.toFormattedDate(),
             icon = Icons.Default.PlayArrow,
             iconColor = Color(0xFF4CAF50),
             timeRemaining = if (status == ScheduleStatus.UPCOMING) {
@@ -54,7 +54,7 @@ fun TimeDetailsSection(
         TimeCard(
             label = "Waktu Tutup",
             time = closeAt.toFormattedTime(),
-            fullDateTime = closeAt.toFormattedFullDateTime(),
+            fullDateTime = closeAt.toFormattedDate(),
             icon = Icons.Default.Stop,
             iconColor = Color(0xFFF44336),
             timeRemaining = if (status == ScheduleStatus.OPEN) {

@@ -31,7 +31,7 @@ import project.collab.banksampah.presentation.theme.Spacing_16
 import project.collab.banksampah.presentation.theme.Spacing_4
 
 @Composable
-fun ColumnScope.RedeemPointForm(
+fun RedeemPointForm(
     redeemPointRequest: RedeemPointRequest,
     onDataChange: (RedeemPointRequest) -> Unit,
     onSubmit: () -> Unit
@@ -65,31 +65,6 @@ fun ColumnScope.RedeemPointForm(
                 value = redeemPointRequest.pointToRedeem,
                 onValueChange = {
                     onDataChange(redeemPointRequest.copy(pointToRedeem = it))
-                },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Next,
-                    capitalization = KeyboardCapitalization.Words
-                ),
-                keyboardActions = KeyboardActions(
-                    onNext = { focusManager.moveFocus(FocusDirection.Down) }
-                )
-            )
-
-            Spacer(modifier = Modifier.size(Spacing_10))
-
-            Text(
-                text = "Cabang BSU",
-                style = MaterialTheme.typography.titleMedium.copy(
-                    fontWeight = FontWeight.Bold
-                )
-            )
-
-            BaseTextField(
-                hint = "Cabang BSU",
-                value = redeemPointRequest.cabangBSU,
-                onValueChange = {
-                    onDataChange(redeemPointRequest.copy(cabangBSU = it))
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
