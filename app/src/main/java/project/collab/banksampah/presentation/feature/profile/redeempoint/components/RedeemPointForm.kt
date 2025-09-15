@@ -61,15 +61,26 @@ fun RedeemPointForm(
             )
 
             BaseTextField(
-                hint = "Masukan poin yang ingin ditukarkan",
-                value = redeemPointRequest.pointToRedeem,
-                onValueChange = {
-                    onDataChange(redeemPointRequest.copy(pointToRedeem = it))
+                hint = "Masukan Jumlah Poin",
+                value = if (redeemPointRequest.pointToRedeem == 0) "" else redeemPointRequest.pointToRedeem.toString(),
+                onValueChange = { input ->
+                    val parsedValue = when {
+                        input.isEmpty() -> 0
+                        input.all { it.isDigit() } -> {
+                            try {
+                                input.toInt()
+                            } catch (e: NumberFormatException) {
+                                0
+                            }
+                        }
+
+                        else -> redeemPointRequest.pointToRedeem
+                    }
+                    onDataChange(redeemPointRequest.copy(pointToRedeem = parsedValue))
                 },
                 keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Next,
-                    capitalization = KeyboardCapitalization.Words
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Next
                 ),
                 keyboardActions = KeyboardActions(
                     onNext = { focusManager.moveFocus(FocusDirection.Down) }

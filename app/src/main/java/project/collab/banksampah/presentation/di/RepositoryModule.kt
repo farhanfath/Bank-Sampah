@@ -32,4 +32,8 @@ val repositoryModule = module {
     single<ScheduleRepository> {
         ScheduleRepositoryImpl(get())
     }
+
+    single<ExchangeRepository> {
+        ExchangeRepositoryImpl(get(), get())
+    }
 }

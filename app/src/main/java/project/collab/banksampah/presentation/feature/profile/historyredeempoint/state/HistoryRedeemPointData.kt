@@ -10,9 +10,10 @@ data class HistoryRedeemPointData(
 )
 
 enum class RedeemStatus(
+    val status: String,
     val desc: String
 ) {
-    DENIED("Ditolak"),
-    PENDING("Belum Diverifikasi"),
-    SUCCESS("Diterima")
+    DENIED("denied","Ditolak"),
+    PENDING("pending","Belum Diverifikasi"),
+    SUCCESS("approved","Diterima")
 }

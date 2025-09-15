@@ -31,4 +31,8 @@ val useCaseModule = module {
     factory<ScheduleUseCase> {
         ScheduleUseCaseImpl(get())
     }
+
+    factory<ExchangeUseCase> {
+        ExchangeUseCaseImpl(get())
+    }
 }

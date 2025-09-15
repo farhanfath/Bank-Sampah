@@ -14,6 +14,8 @@ import project.collab.banksampah.data.remote.api.AuthApiService
 import project.collab.banksampah.data.remote.api.AuthApiServiceImpl
 import project.collab.banksampah.data.remote.api.BsuApiService
 import project.collab.banksampah.data.remote.api.BsuApiServiceImpl
+import project.collab.banksampah.data.remote.api.ExchangeApiService
+import project.collab.banksampah.data.remote.api.ExchangeApiServiceImpl
 import project.collab.banksampah.data.remote.api.GalleryApiService
 import project.collab.banksampah.data.remote.api.GalleryApiServiceImpl
 import project.collab.banksampah.data.remote.api.ScheduleApiService
@@ -65,5 +67,9 @@ val dataModule = module {
 
     single<ScheduleApiService> {
         ScheduleApiServiceImpl(get())
+    }
+
+    single<ExchangeApiService> {
+        ExchangeApiServiceImpl(get())
     }
 }
