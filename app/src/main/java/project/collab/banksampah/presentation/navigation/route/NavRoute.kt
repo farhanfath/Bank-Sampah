@@ -66,7 +66,8 @@ sealed class NavRoute(val route: String) {
             val title: String,
             val description: String,
             val imageUrl: String,
-            val timeStamp: String
+            val timeStamp: String,
+            val editor: String
         ) : NavRoute("DetailArticle")
 
         @Serializable

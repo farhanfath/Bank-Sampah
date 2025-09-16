@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
 import project.collab.banksampah.presentation.feature.profile.homeprofile.components.ProfileHeader
+import project.collab.banksampah.presentation.feature.profile.homeprofile.components.ProfileHeaderError
 import project.collab.banksampah.presentation.feature.profile.homeprofile.components.ProfileMenu
 import project.collab.banksampah.presentation.feature.profile.user.UserViewModel
 import project.collab.banksampah.presentation.feature.profile.user.components.shimmer.ProfileHeaderShimmer
@@ -41,9 +42,16 @@ fun HomeProfileScreen(
                 ProfileHeaderShimmer()
             }
             userDataState.isDataLoaded -> {
-                ProfileHeader(
-                    onUserProfileClick = navigator::navigateToUserProfile,
-                    userName = userDataState.userData?.name ?: ""
+                userDataState.userData?.name?.let { userName ->
+                    ProfileHeader(
+                        onUserProfileClick = navigator::navigateToUserProfile,
+                        userName = userName
+                    )
+                }
+            }
+            userDataState.isError -> {
+                ProfileHeaderError(
+                    onRetry = userViewModel::getUserData
                 )
             }
         }

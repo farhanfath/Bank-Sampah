@@ -23,6 +23,7 @@ import project.collab.banksampah.presentation.theme.PrimaryGreen
 import project.collab.banksampah.presentation.theme.Size_20
 import project.collab.banksampah.presentation.theme.Size_30
 import project.collab.banksampah.presentation.theme.Spacing_12
+import project.collab.banksampah.presentation.theme.Spacing_16
 import project.collab.banksampah.presentation.theme.Spacing_8
 
 @Composable
@@ -42,9 +43,7 @@ fun ColumnScope.TotalPointErrorCard(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(end = Spacing_8)
+                modifier = Modifier.padding(end = Spacing_16)
             ) {
                 Text(
                     text = "Poin Anda :",

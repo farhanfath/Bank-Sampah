@@ -53,6 +53,7 @@ import androidx.compose.ui.zIndex
 import kotlinx.coroutines.launch
 import project.collab.banksampah.presentation.components.base.BaseImage
 import project.collab.banksampah.presentation.theme.Spacing_50
+import project.collab.banksampah.presentation.utils.fromHtml
 import project.collab.banksampah.presentation.utils.toAnnotatedString
 import project.collab.banksampah.presentation.utils.toFormattedDate
 
@@ -241,7 +242,7 @@ fun SmartScrollArticleDetailScreen(
                         // Split content into multiple items untuk demonstrasi scroll
                         item {
                             Text(
-                                text = description.toAnnotatedString(),
+                                text = description.fromHtml().toString(),
                                 style = MaterialTheme.typography.bodyMedium.copy(
                                     textAlign = TextAlign.Justify,
                                     lineHeight = 20.sp

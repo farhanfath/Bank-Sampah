@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
+import project.collab.banksampah.presentation.feature.article_detail.ArticleDetailScreen
 import project.collab.banksampah.presentation.feature.article_detail.SmartScrollArticleDetailScreen
 import project.collab.banksampah.presentation.feature.auth.login.LoginScreen
 import project.collab.banksampah.presentation.feature.auth.register.RegisterScreen
@@ -32,7 +33,6 @@ fun AppNavHost(
             composable<NavRoute.Home.Lobby> {
                 HomeBottomSheetHost(
                     mainNavController = navController
-
                 )
             }
         }
@@ -77,13 +77,22 @@ fun AppNavHost(
         }
         composable<NavRoute.Detail.ArticleDetail> { entry ->
             val articleDetail = entry.toRoute<NavRoute.Detail.ArticleDetail>()
+//            ArticleDetailScreen(
+//                onBackClick = navController::navigateUp,
+//                articleId = articleDetail.articleId,
+//                title = articleDetail.title,
+//                description = articleDetail.description,
+//                imageUrl = articleDetail.imageUrl,
+//                timeStamp = articleDetail.timeStamp,
+//                editor = articleDetail.editor
+//            )
             SmartScrollArticleDetailScreen(
                 onBackClick = navController::navigateUp,
                 articleId = articleDetail.articleId,
                 title = articleDetail.title,
                 description = articleDetail.description,
                 imageUrl = articleDetail.imageUrl,
-                timeStamp = articleDetail.timeStamp,
+                timeStamp = articleDetail.timeStamp
             )
         }
     }

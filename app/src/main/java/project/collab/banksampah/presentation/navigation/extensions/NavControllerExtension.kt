@@ -38,7 +38,8 @@ fun NavHostController.navigateToArticleDetail(article: Article) {
             title = article.title,
             description = article.description,
             imageUrl = article.coverImageUrl,
-            timeStamp = article.timestamp
+            timeStamp = article.timestamp,
+            editor = article.editor
         )
     )
 }
