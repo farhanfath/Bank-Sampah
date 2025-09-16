@@ -39,5 +39,6 @@ object ApiEndpoint {
         const val ALL_USER_TRASH_EXCHANGE_HISTORY = "/user/getUserTrashExchangeHistory/{userId}"
         const val USER_TRASH_EXCHANGE_HISTORY_BY_ID = "/user/getUserTrashExchangeHistory/{userId}/{trashExchangeId}"
         const val REQUEST_POINT_EXCHANGE = "/point/request"
+        const val ALL_USER_POINT_REDEEM_HISTORY = "/user/getUserPointTransactionHistory/{userId}"
     }
 }

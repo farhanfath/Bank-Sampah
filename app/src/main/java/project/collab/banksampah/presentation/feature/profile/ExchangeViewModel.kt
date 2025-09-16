@@ -21,7 +21,11 @@ class ExchangeViewModel (
 
     val trashExchangeHistoryListState =
         exchangeUseCase.getAllUserTrashExchangeHistory()
-        .cachedIn(viewModelScope)
+            .cachedIn(viewModelScope)
+
+    val redeemPointHistoryListState =
+        exchangeUseCase.getAllUserPointRedeemHistory()
+            .cachedIn(viewModelScope)
 
     fun requestPointExchange(pointRequest: RedeemPointRequest) {
         _pointRequestExchangeState.update { it.copy(isLoading = true) }

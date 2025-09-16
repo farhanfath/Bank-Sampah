@@ -8,25 +8,23 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import project.collab.banksampah.R
 import project.collab.banksampah.presentation.components.base.BaseCard
-import project.collab.banksampah.presentation.components.base.BaseImage
 import project.collab.banksampah.presentation.components.base.BaseShimmer
+import project.collab.banksampah.presentation.theme.PrimaryGrey
+import project.collab.banksampah.presentation.theme.Size_1
 import project.collab.banksampah.presentation.theme.Size_30
 import project.collab.banksampah.presentation.theme.Spacing_12
 import project.collab.banksampah.presentation.theme.Spacing_16
 
 @Composable
-fun ColumnScope.TotalPointCard(
-    totalPoint: Int
-) {
+fun ColumnScope.TotalPointCardShimmer() {
     BaseCard(
+        stroke = Size_1,
+        strokeColor = PrimaryGrey,
         modifier = Modifier.align(Alignment.End)
     ) {
         Row(
@@ -37,26 +35,33 @@ fun ColumnScope.TotalPointCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
+            // Left Content Shimmer
             Column(
-                modifier = Modifier.padding(end = Spacing_16)
+                modifier = Modifier.padding(end = Spacing_16),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Text(
-                    text = "Poin Anda : ",
-                    style = MaterialTheme.typography.titleSmall
+                // "Poin Anda :" text shimmer
+                BaseShimmer(
+                    modifier = Modifier
+                        .width(80.dp)
+                        .height(16.dp)
                 )
 
-                Text(
-                    text = "$totalPoint",
-                    style = MaterialTheme.typography.bodyMedium
+                // Total point value shimmer
+                BaseShimmer(
+                    modifier = Modifier
+                        .width(60.dp)
+                        .height(14.dp)
                 )
             }
 
+            // Right Content Shimmer (Icon)
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                BaseImage(
-                    modifier = Modifier.size(Size_30),
-                    image = R.drawable.ic_point
+                // Point icon shimmer
+                BaseShimmer(
+                    modifier = Modifier.size(Size_30)
                 )
             }
         }

@@ -18,7 +18,7 @@ import project.collab.banksampah.presentation.theme.Spacing_16
 import project.collab.banksampah.presentation.theme.Spacing_4
 
 @Composable
-fun HistoryPointChipStatus(
+fun RedeemPointChipStatus(
     status: RedeemStatus
 ) {
     Card(

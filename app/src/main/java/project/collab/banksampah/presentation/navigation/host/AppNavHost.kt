@@ -6,13 +6,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
-import project.collab.banksampah.getHistoryRedeemPointResponse
-import project.collab.banksampah.getRedeemTrashHistoryResponse
 import project.collab.banksampah.presentation.feature.article_detail.SmartScrollArticleDetailScreen
 import project.collab.banksampah.presentation.feature.auth.login.LoginScreen
 import project.collab.banksampah.presentation.feature.auth.register.RegisterScreen
 import project.collab.banksampah.presentation.feature.profile.historyRedeemTrash.RedeemTrashHistoryScreen
-import project.collab.banksampah.presentation.feature.profile.historyredeempoint.HistoryRedeemPointScreen
+import project.collab.banksampah.presentation.feature.profile.historyredeempoint.RedeemPointHistoryScreen
 import project.collab.banksampah.presentation.feature.profile.redeempoint.RedeemPointScreen
 import project.collab.banksampah.presentation.feature.profile.user.ProfileUserScreen
 import project.collab.banksampah.presentation.navigation.extensions.navigateToLogin
@@ -66,15 +64,13 @@ fun AppNavHost(
             )
         }
         composable<NavRoute.Profile.HistoryRedeemPoint> {
-            HistoryRedeemPointScreen(
+            RedeemPointHistoryScreen(
                 onBackClick = navController::navigateUp,
-                historyRedeemPointResponse = getHistoryRedeemPointResponse()
             )
         }
         composable<NavRoute.Profile.HistoryRedeemTrash> {
             RedeemTrashHistoryScreen(
-                onBackClick = navController::navigateUp,
-                redeemTrashHistoryResponse = getRedeemTrashHistoryResponse()
+                onBackClick = navController::navigateUp
             )
         }
         composable<NavRoute.Detail.ArticleDetail> { entry ->

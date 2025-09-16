@@ -25,6 +25,7 @@ import project.collab.banksampah.presentation.feature.profile.ExchangeViewModel
 import project.collab.banksampah.presentation.feature.profile.redeempoint.components.RedeemPointForm
 import project.collab.banksampah.presentation.feature.profile.redeempoint.components.RedeemSuccessDialog
 import project.collab.banksampah.presentation.feature.profile.redeempoint.components.TotalPointCard
+import project.collab.banksampah.presentation.feature.profile.redeempoint.components.TotalPointCardShimmer
 import project.collab.banksampah.presentation.feature.profile.user.UserViewModel
 import project.collab.banksampah.presentation.theme.Spacing_16
 import project.collab.banksampah.presentation.theme.Spacing_20
@@ -74,9 +75,13 @@ fun RedeemPointScreen(
                     onBackClick = onBackClick
                 )
 
-                TotalPointCard(
-                    totalPoint = userDataState.userData?.totalPointUser.replaceIfNull()
-                )
+                if (userDataState.isLoading) {
+                    TotalPointCardShimmer()
+                } else {
+                    TotalPointCard(
+                        totalPoint = userDataState.userData?.totalPointUser.replaceIfNull()
+                    )
+                }
 
                 Spacer(modifier = Modifier.size(Spacing_20))
 

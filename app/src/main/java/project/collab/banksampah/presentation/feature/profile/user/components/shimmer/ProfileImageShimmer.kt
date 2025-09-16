@@ -9,6 +9,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import project.collab.banksampah.presentation.components.base.BaseCard
 import project.collab.banksampah.presentation.components.base.BaseShimmer
 import project.collab.banksampah.presentation.theme.Size_2
 import project.collab.banksampah.presentation.theme.Size_40

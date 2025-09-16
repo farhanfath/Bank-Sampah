@@ -19,9 +19,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import project.collab.banksampah.R
+import project.collab.banksampah.domain.model.response.trash_exchange.TrashExchangeHistory
 import project.collab.banksampah.presentation.components.base.BaseCard
 import project.collab.banksampah.presentation.components.base.BaseImage
-import project.collab.banksampah.presentation.feature.profile.historyRedeemTrash.state.RedeemTrashHistoryData
 import project.collab.banksampah.presentation.theme.PrimaryGreen
 import project.collab.banksampah.presentation.theme.Size_20
 import project.collab.banksampah.presentation.theme.Size_40
@@ -29,14 +29,18 @@ import project.collab.banksampah.presentation.theme.Spacing_10
 import project.collab.banksampah.presentation.theme.Spacing_12
 import project.collab.banksampah.presentation.theme.Spacing_30
 import project.collab.banksampah.presentation.theme.Spacing_4
+import project.collab.banksampah.presentation.theme.Spacing_8
+import project.collab.banksampah.presentation.utils.toFormattedDateTime
 
 @Composable
 fun RedeemTrashCard(
-    redeemTrashHistoryData: RedeemTrashHistoryData,
+    redeemTrashHistoryData: TrashExchangeHistory,
     onClick: () -> Unit
 ) {
     BaseCard(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .padding(vertical = Spacing_8, horizontal = Spacing_4)
+            .fillMaxWidth(),
         onClick = onClick
     ) {
         Row(
@@ -61,7 +65,7 @@ fun RedeemTrashCard(
 
                 // date
                 Text(
-                    text = redeemTrashHistoryData.date,
+                    text = redeemTrashHistoryData.exchangeDate.toFormattedDateTime(),
                     style = MaterialTheme.typography.labelLarge
                 )
 
@@ -76,7 +80,7 @@ fun RedeemTrashCard(
                     Spacer(modifier = Modifier.size(Spacing_10))
 
                     Text(
-                        text = redeemTrashHistoryData.totalPoint,
+                        text = redeemTrashHistoryData.totalPoint.toString(),
                         style = MaterialTheme.typography.bodySmall
                     )
                 }

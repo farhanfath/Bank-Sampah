@@ -6,6 +6,7 @@ import project.collab.banksampah.data.remote.model.mapper.toDomain
 import project.collab.banksampah.data.remote.model.mapper.toDto
 import project.collab.banksampah.domain.model.request.RedeemPointRequest
 import project.collab.banksampah.domain.model.response.point_exchange.PointExchangeRequestResponse
+import project.collab.banksampah.domain.model.response.point_exchange.RedeemPointHistory
 import project.collab.banksampah.domain.model.response.trash_exchange.TrashExchangeHistory
 import project.collab.banksampah.domain.repository.ExchangeRepository
 import project.collab.banksampah.domain.utils.ResponseResult
@@ -54,6 +55,22 @@ class ExchangeRepositoryImpl (
             is ResponseResult.Success -> {
                 val pointExchangeRequestResponse = result.data.toDomain()
                 ResponseResult.Success(pointExchangeRequestResponse)
+            }
+            is ResponseResult.Error -> result
+        }
+    }
+
+    override suspend fun getAllUserPointRedeemHistory(
+        page: Int,
+        limit: Int
+    ): ResponseResult<List<RedeemPointHistory>> {
+        val userId = tokenDataSource.getUserId() ?: ""
+        val result = exchangeApiService.getAllUserPointRedeemHistory(page, limit, userId)
+
+        return when(result) {
+            is ResponseResult.Success -> {
+                val pointRedeemHistory = result.data.data.histories.map { it.toDomain() }
+                ResponseResult.Success(pointRedeemHistory)
             }
             is ResponseResult.Error -> result
         }

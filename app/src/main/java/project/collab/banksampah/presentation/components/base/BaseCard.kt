@@ -26,6 +26,7 @@ import project.collab.banksampah.presentation.theme.Spacing_20
 fun BaseCard(
     modifier: Modifier = Modifier,
     stroke: Dp = Size_3,
+    strokeColor: Color = PrimaryGreen,
     onClick: (() -> Unit)? = null,
     content: @Composable RowScope.() -> Unit
 ) {
@@ -33,7 +34,7 @@ fun BaseCard(
         modifier = modifier.clickable(onClick = { onClick?.invoke() }),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         shape = RoundedCornerShape(Spacing_15),
-        border = BorderStroke(width = stroke, color = PrimaryGreen),
+        border = BorderStroke(width = stroke, color = strokeColor),
         elevation = CardDefaults.cardElevation(defaultElevation = Size_2)
     ) {
         Row(

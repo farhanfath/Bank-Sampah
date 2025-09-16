@@ -18,12 +18,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import project.collab.banksampah.R
+import project.collab.banksampah.domain.model.response.point_exchange.RedeemPointHistory
 import project.collab.banksampah.presentation.components.base.BaseCard
 import project.collab.banksampah.presentation.components.base.BaseImage
-import project.collab.banksampah.presentation.feature.profile.historyredeempoint.state.HistoryRedeemPointData
-import project.collab.banksampah.presentation.feature.profile.historyredeempoint.state.RedeemStatus
+import project.collab.banksampah.presentation.feature.profile.historyredeempoint.state.getRedeemStatus
 import project.collab.banksampah.presentation.theme.PrimaryGreen
 import project.collab.banksampah.presentation.theme.Size_20
 import project.collab.banksampah.presentation.theme.Size_40
@@ -31,14 +30,19 @@ import project.collab.banksampah.presentation.theme.Spacing_10
 import project.collab.banksampah.presentation.theme.Spacing_12
 import project.collab.banksampah.presentation.theme.Spacing_30
 import project.collab.banksampah.presentation.theme.Spacing_4
+import project.collab.banksampah.presentation.theme.Spacing_8
 
 @Composable
-fun HistoryPointCard(
-    historyRedeemPointData: HistoryRedeemPointData,
+fun RedeemPointCard(
+    historyRedeemPointData: RedeemPointHistory,
     onClick: () -> Unit
 ) {
+    val redeemStatus = historyRedeemPointData.getRedeemStatus()
+
     BaseCard(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .padding(vertical = Spacing_8, horizontal = Spacing_4)
+            .fillMaxWidth(),
         onClick = onClick
     ) {
         Row(
@@ -61,7 +65,7 @@ fun HistoryPointCard(
                     )
                 )
 
-                HistoryPointChipStatus(status = historyRedeemPointData.redeemStatus)
+                RedeemPointChipStatus(status = redeemStatus)
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
@@ -74,7 +78,7 @@ fun HistoryPointCard(
                     Spacer(modifier = Modifier.size(Spacing_10))
 
                     Text(
-                        text = historyRedeemPointData.pointRequest,
+                        text = "${historyRedeemPointData.pointExchangeRequest}",
                         style = MaterialTheme.typography.bodySmall
                     )
                 }
@@ -85,7 +89,9 @@ fun HistoryPointCard(
             ) {
                 BaseImage(
                     image = R.drawable.ic_point_second,
-                    modifier = Modifier.width(Size_40).height(Size_20)
+                    modifier = Modifier
+                        .width(Size_40)
+                        .height(Size_20)
                     
                 )
 
@@ -99,16 +105,4 @@ fun HistoryPointCard(
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun PreviewHistoryPointCard() {
-    HistoryPointCard(
-        historyRedeemPointData = HistoryRedeemPointData(
-            pointRequest = "20.000",
-            RedeemStatus.DENIED
-        ),
-        onClick = {}
-    )
 }

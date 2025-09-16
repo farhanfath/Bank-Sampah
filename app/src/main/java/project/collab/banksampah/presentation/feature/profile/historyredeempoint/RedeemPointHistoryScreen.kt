@@ -1,4 +1,4 @@
-package project.collab.banksampah.presentation.feature.profile.historyRedeemTrash
+package project.collab.banksampah.presentation.feature.profile.historyredeempoint
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,22 +17,22 @@ import org.koin.androidx.compose.koinViewModel
 import project.collab.banksampah.presentation.components.CommonEmptyState
 import project.collab.banksampah.presentation.components.CustomTopBar
 import project.collab.banksampah.presentation.components.base.BaseHeader
-import project.collab.banksampah.presentation.components.base.BaseScreenWithListItem
 import project.collab.banksampah.presentation.components.base.BaseTitleSection
 import project.collab.banksampah.presentation.feature.profile.ExchangeViewModel
-import project.collab.banksampah.presentation.feature.profile.historyRedeemTrash.components.RedeemTrashCard
-import project.collab.banksampah.presentation.feature.profile.historyRedeemTrash.components.RedeemTrashCardShimmer
+import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.RedeemPointCard
+import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.RedeemPointCardShimmer
+import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.RedeemPointFailedSection
 import project.collab.banksampah.presentation.theme.Spacing_10
 import project.collab.banksampah.presentation.theme.Spacing_16
-import project.collab.banksampah.presentation.theme.Spacing_4
+import project.collab.banksampah.presentation.theme.Spacing_20
 import project.collab.banksampah.presentation.utils.handlePagingState
 
 @Composable
-fun RedeemTrashHistoryScreen(
+fun RedeemPointHistoryScreen(
     onBackClick: () -> Unit,
     exchangeViewModel: ExchangeViewModel = koinViewModel()
 ) {
-    val redeemTrashHistoryListState = exchangeViewModel.trashExchangeHistoryListState.collectAsLazyPagingItems()
+    val redeemPointHistoryState = exchangeViewModel.redeemPointHistoryListState.collectAsLazyPagingItems()
 
     Scaffold(
         topBar = {
@@ -42,11 +42,11 @@ fun RedeemTrashHistoryScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(vertical = it.calculateTopPadding(), horizontal = Spacing_16),
+                .padding(vertical = it.calculateTopPadding(), horizontal = Spacing_16)
         ) {
             item {
                 BaseHeader(
-                    title = "Riwayat Penukaran\nSampah",
+                    title = "Riwayat Penukaran\nPoin",
                     textStyle = MaterialTheme.typography.headlineSmall.copy(
                         color = Color.Black,
                         fontWeight = FontWeight.Bold,
@@ -60,49 +60,56 @@ fun RedeemTrashHistoryScreen(
                 BaseTitleSection(
                     title = "Riwayat"
                 )
-
-                Spacer(modifier = Modifier.size(Spacing_10))
             }
 
             handlePagingState(
-                items = redeemTrashHistoryListState,
+                items = redeemPointHistoryState,
                 onLoading = {
                     items(5) {
-                        RedeemTrashCardShimmer()
+                        RedeemPointCardShimmer()
                     }
                 },
                 onSuccess = {
                     when {
-                        redeemTrashHistoryListState.itemCount == 0 -> {
+                        redeemPointHistoryState.itemCount == 0 -> {
                             item {
                                 CommonEmptyState(
-                                    message = "Belum ada Penukaran Sampah yang dilakukan"
+                                    message = "Belum ada penukaran poin yang dilakukan"
                                 )
                             }
                         }
                         else -> {
                             items(
-                                count = redeemTrashHistoryListState.itemCount,
+                                count = redeemPointHistoryState.itemCount,
                                 key = { index ->
-                                    val redeemTrash = redeemTrashHistoryListState[index]
-                                    if (redeemTrash != null) {
-                                        "redeemTrash_${redeemTrash.id}_$index"
+                                    val redeemPoint = redeemPointHistoryState[index]
+                                    if (redeemPoint != null) {
+                                        "redeemPoint_${redeemPoint.id}_$index"
                                     } else {
                                         "null_$index"
                                     }
                                 }
                             ) { index ->
-                                redeemTrashHistoryListState[index]?.let { data ->
-                                    RedeemTrashCard(
-                                        redeemTrashHistoryData = data,
+                                redeemPointHistoryState[index]?.let { data ->
+                                    RedeemPointCard(
+                                        historyRedeemPointData = data,
                                         onClick = {}
                                     )
                                 }
                             }
+                            item {
+                                Spacer(modifier = Modifier.size(Spacing_20))
+                            }
                         }
                     }
                 },
-                onError = {}
+                onError = {
+                    item {
+                        RedeemPointFailedSection(
+                            onRetry = redeemPointHistoryState::retry
+                        )
+                    }
+                }
             )
         }
     }

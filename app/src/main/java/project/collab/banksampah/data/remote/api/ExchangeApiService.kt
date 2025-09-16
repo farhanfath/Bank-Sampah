@@ -10,6 +10,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import project.collab.banksampah.data.remote.model.request.PointExchangeRequestDto
 import project.collab.banksampah.data.remote.model.response.point_exchange.PointExchangeRequestResponseDto
+import project.collab.banksampah.data.remote.model.response.point_exchange.history.RedeemPointResponseDto
 import project.collab.banksampah.data.remote.model.response.trash_exchange.TrashExchangeHistoryDetailResponseDto
 import project.collab.banksampah.data.remote.model.response.trash_exchange.TrashExchangeHistoryListResponseDto
 import project.collab.banksampah.data.remote.utils.ApiEndpoint
@@ -32,6 +33,12 @@ interface ExchangeApiService {
     suspend fun postPointExchange(
         request: PointExchangeRequestDto
     ) : ResponseResult<PointExchangeRequestResponseDto>
+
+    suspend fun getAllUserPointRedeemHistory(
+        page: Int,
+        limit: Int = 10,
+        userId: String
+    ) : ResponseResult<RedeemPointResponseDto>
 }
 
 class ExchangeApiServiceImpl(
@@ -79,6 +86,21 @@ class ExchangeApiServiceImpl(
                 contentType(ContentType.Application.Json)
                 setBody(request)
             }.body()
+            response
+        }
+    }
+
+    override suspend fun getAllUserPointRedeemHistory(
+        page: Int,
+        limit: Int,
+        userId: String
+    ): ResponseResult<RedeemPointResponseDto> {
+        return safeApiCall {
+            val url = ApiEndpoint.User.ALL_USER_POINT_REDEEM_HISTORY.replacePlaceholders(
+                "userId" to userId
+            )
+
+            val response : RedeemPointResponseDto = httpClient.get(url).body()
             response
         }
     }
