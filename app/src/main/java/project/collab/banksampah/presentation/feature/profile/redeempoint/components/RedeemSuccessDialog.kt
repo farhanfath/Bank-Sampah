@@ -47,6 +47,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import project.collab.banksampah.domain.model.response.point_exchange.PointExchangeRequestResponse
+import project.collab.banksampah.presentation.components.CopyTextButton
 import project.collab.banksampah.presentation.components.base.BaseDialog
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.state.RedeemStatus
 import project.collab.banksampah.presentation.theme.PrimaryGreen
@@ -60,7 +61,7 @@ fun RedeemSuccessDialog(
     redeemResponse: PointExchangeRequestResponse,
     isVisible: Boolean,
     onDismiss: () -> Unit,
-    onCopyTransactionCode: () -> Unit = {}
+    onNavigateToRedeemPointHistory: () -> Unit
 ) {
     BaseDialog(
         isVisible = isVisible,
@@ -176,7 +177,9 @@ fun RedeemSuccessDialog(
                             )
                         ) {
                             Column(
-                                modifier = Modifier.padding(16.dp),
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                    .fillMaxWidth(),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 Text(
@@ -201,17 +204,9 @@ fun RedeemSuccessDialog(
                                         )
                                     )
 
-                                    IconButton(
-                                        onClick = onCopyTransactionCode,
-                                        modifier = Modifier.size(32.dp)
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Default.ContentCopy,
-                                            contentDescription = "Copy",
-                                            tint = Color(0xFF666666),
-                                            modifier = Modifier.size(16.dp)
-                                        )
-                                    }
+                                    CopyTextButton(
+                                        textToCopy = redeemResponse.transactionCode
+                                    )
                                 }
                             }
                         }
@@ -291,8 +286,8 @@ fun RedeemSuccessDialog(
 
                             OutlinedButton(
                                 onClick = {
-                                    // Navigate to transaction history
                                     onDismiss()
+                                    onNavigateToRedeemPointHistory()
                                 },
                                 modifier = Modifier.fillMaxWidth(),
                                 shape = RoundedCornerShape(12.dp)

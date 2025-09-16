@@ -8,24 +8,33 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.paging.compose.collectAsLazyPagingItems
 import org.koin.androidx.compose.koinViewModel
+import project.collab.banksampah.domain.model.response.trash_exchange.TrashExchangeHistory
 import project.collab.banksampah.presentation.components.CommonEmptyState
 import project.collab.banksampah.presentation.components.CustomTopBar
 import project.collab.banksampah.presentation.components.base.BaseHeader
 import project.collab.banksampah.presentation.components.base.BaseScreenWithListItem
 import project.collab.banksampah.presentation.components.base.BaseTitleSection
+import project.collab.banksampah.presentation.components.base.rememberVisibilityState
 import project.collab.banksampah.presentation.feature.profile.ExchangeViewModel
 import project.collab.banksampah.presentation.feature.profile.historyRedeemTrash.components.RedeemTrashCard
 import project.collab.banksampah.presentation.feature.profile.historyRedeemTrash.components.RedeemTrashCardShimmer
+import project.collab.banksampah.presentation.feature.profile.historyRedeemTrash.detail.TrashExchangeDetailDialog
 import project.collab.banksampah.presentation.theme.Spacing_10
 import project.collab.banksampah.presentation.theme.Spacing_16
 import project.collab.banksampah.presentation.theme.Spacing_4
 import project.collab.banksampah.presentation.utils.handlePagingState
+import project.collab.banksampah.presentation.utils.hide
+import project.collab.banksampah.presentation.utils.show
 
 @Composable
 fun RedeemTrashHistoryScreen(
@@ -34,6 +43,8 @@ fun RedeemTrashHistoryScreen(
 ) {
     val redeemTrashHistoryListState = exchangeViewModel.trashExchangeHistoryListState.collectAsLazyPagingItems()
 
+    var selectedTrashExchange by remember { mutableStateOf<TrashExchangeHistory?>(null) }
+    val detailExchangeTrashDialog = rememberVisibilityState()
     Scaffold(
         topBar = {
             CustomTopBar()
@@ -95,7 +106,10 @@ fun RedeemTrashHistoryScreen(
                                 redeemTrashHistoryListState[index]?.let { data ->
                                     RedeemTrashCard(
                                         redeemTrashHistoryData = data,
-                                        onClick = {}
+                                        onClick = {
+                                            selectedTrashExchange = data
+                                            detailExchangeTrashDialog.show()
+                                        }
                                     )
                                 }
                             }
@@ -106,4 +120,13 @@ fun RedeemTrashHistoryScreen(
             )
         }
     }
+
+    TrashExchangeDetailDialog(
+        isVisible = detailExchangeTrashDialog.value,
+        trashExchangeData = selectedTrashExchange,
+        onDismiss = {
+            detailExchangeTrashDialog.hide()
+            selectedTrashExchange = null
+        }
+    )
 }

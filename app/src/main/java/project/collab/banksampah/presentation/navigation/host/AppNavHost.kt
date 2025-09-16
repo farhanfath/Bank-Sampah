@@ -14,6 +14,7 @@ import project.collab.banksampah.presentation.feature.profile.historyredeempoint
 import project.collab.banksampah.presentation.feature.profile.redeempoint.RedeemPointScreen
 import project.collab.banksampah.presentation.feature.profile.user.ProfileUserScreen
 import project.collab.banksampah.presentation.navigation.extensions.navigateToLogin
+import project.collab.banksampah.presentation.navigation.extensions.navigateToRedeemPointHistory
 import project.collab.banksampah.presentation.navigation.extensions.navigateToRegister
 import project.collab.banksampah.presentation.navigation.route.NavRoute
 
@@ -60,7 +61,8 @@ fun AppNavHost(
         }
         composable<NavRoute.Profile.RedeemPoint> {
             RedeemPointScreen(
-                onBackClick = navController::navigateUp
+                onBackClick = navController::navigateUp,
+                onNavigateToRedeemPointHistory = navController::navigateToRedeemPointHistory
             )
         }
         composable<NavRoute.Profile.HistoryRedeemPoint> {

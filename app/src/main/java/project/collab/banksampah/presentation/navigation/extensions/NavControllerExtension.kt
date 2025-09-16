@@ -42,3 +42,9 @@ fun NavHostController.navigateToArticleDetail(article: Article) {
         )
     )
 }
+
+/**
+ * transaction navigation
+ */
+
+fun NavHostController.navigateToRedeemPointHistory() = navigate(NavRoute.Profile.HistoryRedeemPoint)

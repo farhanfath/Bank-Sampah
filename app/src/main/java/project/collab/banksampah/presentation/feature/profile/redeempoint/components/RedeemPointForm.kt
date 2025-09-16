@@ -34,7 +34,8 @@ import project.collab.banksampah.presentation.theme.Spacing_4
 fun RedeemPointForm(
     redeemPointRequest: RedeemPointRequest,
     onDataChange: (RedeemPointRequest) -> Unit,
-    onSubmit: () -> Unit
+    onSubmit: () -> Unit,
+    isLoading: Boolean = false
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -84,18 +85,20 @@ fun RedeemPointForm(
                 ),
                 keyboardActions = KeyboardActions(
                     onNext = { focusManager.moveFocus(FocusDirection.Down) }
-                )
+                ),
+                enabled = !isLoading
             )
 
             Spacer(modifier = Modifier.size(Spacing_16))
 
             BaseButton(
                 modifier = Modifier.align(Alignment.End),
-                text = "Submit",
+                text = if (isLoading) "Proses..." else "Submit",
                 textStyle = MaterialTheme.typography.bodyMedium.copy(
                     fontWeight = FontWeight.Bold
                 ),
-                onClick = onSubmit
+                onClick = onSubmit,
+                enabled = !isLoading
             )
         }
     }

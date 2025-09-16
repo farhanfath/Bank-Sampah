@@ -8,24 +8,33 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.paging.compose.collectAsLazyPagingItems
 import org.koin.androidx.compose.koinViewModel
+import project.collab.banksampah.domain.model.response.point_exchange.RedeemPointHistory
 import project.collab.banksampah.presentation.components.CommonEmptyState
 import project.collab.banksampah.presentation.components.CustomTopBar
 import project.collab.banksampah.presentation.components.base.BaseHeader
 import project.collab.banksampah.presentation.components.base.BaseTitleSection
+import project.collab.banksampah.presentation.components.base.rememberVisibilityState
 import project.collab.banksampah.presentation.feature.profile.ExchangeViewModel
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.RedeemPointCard
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.RedeemPointCardShimmer
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.RedeemPointFailedSection
+import project.collab.banksampah.presentation.feature.profile.historyredeempoint.detail.RedeemPointDetailDialog
 import project.collab.banksampah.presentation.theme.Spacing_10
 import project.collab.banksampah.presentation.theme.Spacing_16
 import project.collab.banksampah.presentation.theme.Spacing_20
 import project.collab.banksampah.presentation.utils.handlePagingState
+import project.collab.banksampah.presentation.utils.hide
+import project.collab.banksampah.presentation.utils.show
 
 @Composable
 fun RedeemPointHistoryScreen(
@@ -33,6 +42,9 @@ fun RedeemPointHistoryScreen(
     exchangeViewModel: ExchangeViewModel = koinViewModel()
 ) {
     val redeemPointHistoryState = exchangeViewModel.redeemPointHistoryListState.collectAsLazyPagingItems()
+
+    var selectedRedeemPoint by remember { mutableStateOf<RedeemPointHistory?>(null) }
+    val detailRedeemDialog = rememberVisibilityState()
 
     Scaffold(
         topBar = {
@@ -93,7 +105,10 @@ fun RedeemPointHistoryScreen(
                                 redeemPointHistoryState[index]?.let { data ->
                                     RedeemPointCard(
                                         historyRedeemPointData = data,
-                                        onClick = {}
+                                        onClick = {
+                                            selectedRedeemPoint = data
+                                            detailRedeemDialog.show()
+                                        }
                                     )
                                 }
                             }
@@ -113,4 +128,13 @@ fun RedeemPointHistoryScreen(
             )
         }
     }
+
+    RedeemPointDetailDialog(
+        isVisible = detailRedeemDialog.value,
+        redeemPointData = selectedRedeemPoint,
+        onDismiss = {
+            detailRedeemDialog.hide()
+            selectedRedeemPoint = null
+        }
+    )
 }
