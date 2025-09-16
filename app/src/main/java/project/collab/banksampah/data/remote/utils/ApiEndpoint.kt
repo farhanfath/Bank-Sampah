@@ -33,8 +33,8 @@ object ApiEndpoint {
     }
 
     object User {
-        const val BY_ID = "/user/getUserById/{id}"
-        const val EDIT_USER = "/user/editUser/{id}"
+        const val BY_ID = "/user/getUserById/{userId}"
+        const val EDIT_USER = "/user/editUser/{userId}"
         const val CHANGE_PASSWORD = "/user/changePasswordUser/{userId}"
         const val ALL_USER_TRASH_EXCHANGE_HISTORY = "/user/getUserTrashExchangeHistory/{userId}"
         const val USER_TRASH_EXCHANGE_HISTORY_BY_ID = "/user/getUserTrashExchangeHistory/{userId}/{trashExchangeId}"

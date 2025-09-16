@@ -163,6 +163,7 @@ fun PasswordTextField(
     onValueChange: (String) -> Unit,
     isError: Boolean = false,
     errorMessage: String? = null,
+    enabled: Boolean = true,
     keyboardActions: KeyboardActions = KeyboardActions.Default
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
@@ -196,7 +197,8 @@ fun PasswordTextField(
                 tint = AccentGrey,
                 modifier = Modifier.size(Size_20)
             )
-        }
+        },
+        enabled = enabled
     )
 }
 
@@ -246,6 +248,7 @@ fun NikTextField(
     onValueChange: (String) -> Unit,
     isError: Boolean = false,
     errorMessage: String? = null,
+    enabled: Boolean = true,
     keyboardActions: KeyboardActions = KeyboardActions.Default
 ) {
     BaseTextField(
@@ -272,7 +275,8 @@ fun NikTextField(
                 tint = AccentGrey,
                 modifier = Modifier.size(Size_20)
             )
-        }
+        },
+        enabled = enabled
     )
 }
 

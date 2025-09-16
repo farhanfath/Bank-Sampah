@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import project.collab.banksampah.domain.model.request.ResetPassRequest
+import project.collab.banksampah.domain.model.request.EditPassRequest
 import project.collab.banksampah.presentation.components.base.BaseBottomSheet
 import project.collab.banksampah.presentation.components.base.BaseButton
 import project.collab.banksampah.presentation.components.base.PasswordTextField
@@ -24,12 +24,13 @@ import project.collab.banksampah.presentation.theme.Spacing_16
 import project.collab.banksampah.presentation.theme.Spacing_20
 
 @Composable
-fun ResetPasswordBottomSheet(
+fun EditPasswordBottomSheet(
     isVisible: Boolean,
     onDismiss: () -> Unit,
-    resetPassData: ResetPassRequest,
-    onDataChange: (ResetPassRequest) -> Unit,
-    onResetPassSave: () -> Unit
+    editPassData: EditPassRequest,
+    onDataChange: (EditPassRequest) -> Unit,
+    onResetPassSave: () -> Unit,
+    isLoading: Boolean = false
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -54,14 +55,31 @@ fun ResetPasswordBottomSheet(
             LazyColumn {
                 item {
                     PasswordTextField(
-                        hint = "Password Baru",
-                        value = resetPassData.newPassword,
+                        hint = "Password Lama",
+                        value = editPassData.oldPassword,
                         onValueChange = {
-                            onDataChange(resetPassData.copy(newPassword = it))
+                            onDataChange(editPassData.copy(oldPassword = it))
                         },
                         keyboardActions = KeyboardActions(
                             onDone = { focusManager.clearFocus() }
-                        )
+                        ),
+                        enabled = !isLoading
+                    )
+
+                    Spacer(modifier = Modifier.size(Spacing_10))
+                }
+
+                item {
+                    PasswordTextField(
+                        hint = "Password Baru",
+                        value = editPassData.newPassword,
+                        onValueChange = {
+                            onDataChange(editPassData.copy(newPassword = it))
+                        },
+                        keyboardActions = KeyboardActions(
+                            onDone = { focusManager.clearFocus() }
+                        ),
+                        enabled = !isLoading
                     )
 
                     Spacer(modifier = Modifier.size(Spacing_10))
@@ -70,17 +88,24 @@ fun ResetPasswordBottomSheet(
                 item {
                     PasswordTextField(
                         hint = "Confirm Password",
-                        value = resetPassData.confirmPassword,
+                        value = editPassData.confirmPassword,
                         onValueChange = {
-                            onDataChange(resetPassData.copy(confirmPassword = it))
+                            onDataChange(editPassData.copy(confirmPassword = it))
                         },
                         keyboardActions = KeyboardActions(
                             onDone = { focusManager.clearFocus() }
-                        )
+                        ),
+                        enabled = !isLoading
                     )
                 }
 
                 item {
+                    val isFormValid = editPassData.oldPassword.isNotBlank() &&
+                            editPassData.newPassword.isNotBlank() &&
+                            editPassData.confirmPassword.isNotBlank()
+
+                    val buttonEnabled = isFormValid && !isLoading
+
                     Column(
                         modifier = Modifier
                             .padding(horizontal = Spacing_10)
@@ -90,11 +115,12 @@ fun ResetPasswordBottomSheet(
 
                         BaseButton(
                             modifier = Modifier.align(Alignment.End),
-                            text = "Simpan",
+                            text = if (isLoading) "Menyimpan..." else "Simpan",
                             textStyle = MaterialTheme.typography.bodyMedium.copy(
                                 fontWeight = FontWeight.Bold
                             ),
-                            onClick = onResetPassSave
+                            onClick = onResetPassSave,
+                            enabled = buttonEnabled
                         )
 
                         Spacer(modifier = Modifier.size(Spacing_20))

@@ -10,7 +10,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -45,6 +47,8 @@ fun UserSettingBottomSheet(
     editProfileData: UserRequest,
     onDataChange: (UserRequest) -> Unit,
     onEditUserSave: () -> Unit,
+    userPhoneNumber: String,
+    isLoading: Boolean = false
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -93,7 +97,8 @@ fun UserSettingBottomSheet(
                                     tint = AccentGrey,
                                     modifier = Modifier.size(Size_20)
                                 )
-                            }
+                            },
+                            enabled = !isLoading
                         )
                     }
                 }
@@ -109,7 +114,8 @@ fun UserSettingBottomSheet(
                             },
                             keyboardActions = KeyboardActions(
                                 onNext = { focusManager.moveFocus(FocusDirection.Down) }
-                            )
+                            ),
+                            enabled = !isLoading
                         )
                     }
                 }
@@ -118,14 +124,31 @@ fun UserSettingBottomSheet(
                     EditUserInputSection(
                         hint = "Nomor HP"
                     ) {
-                        PhoneTextField(
-                            value = editProfileData.phoneNumber,
-                            onValueChange = {
-                                onDataChange(editProfileData.copy(phoneNumber = it))
+                        BaseTextField(
+                            hint = "Nomor HP",
+                            value = userPhoneNumber,
+                            onValueChange = { },
+                            enabled = false,
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Phone,
+                                imeAction = ImeAction.Next
+                            ),
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.Phone,
+                                    contentDescription = "Phone",
+                                    tint = AccentGrey.copy(alpha = 0.5f),
+                                    modifier = Modifier.size(Size_20)
+                                )
                             },
-                            keyboardActions = KeyboardActions(
-                                onNext = { focusManager.moveFocus(FocusDirection.Down) }
-                            )
+                            trailingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.Lock,
+                                    contentDescription = "Locked",
+                                    tint = AccentGrey.copy(alpha = 0.5f),
+                                    modifier = Modifier.size(Spacing_16)
+                                )
+                            }
                         )
                     }
                 }
@@ -147,6 +170,11 @@ fun UserSettingBottomSheet(
                 }
 
                 item {
+                    val isFormValid = editProfileData.name.isNotBlank() &&
+                            editProfileData.nik.isNotBlank() &&
+                            editProfileData.address.isNotBlank()
+
+                    val buttonEnabled = isFormValid && !isLoading
                     Column(
                         modifier = Modifier
                             .padding(horizontal = Spacing_10)
@@ -160,7 +188,8 @@ fun UserSettingBottomSheet(
                             textStyle = MaterialTheme.typography.bodyMedium.copy(
                                 fontWeight = FontWeight.Bold
                             ),
-                            onClick = onEditUserSave
+                            onClick = onEditUserSave,
+                            enabled = buttonEnabled
                         )
 
                         Spacer(modifier = Modifier.size(Spacing_20))

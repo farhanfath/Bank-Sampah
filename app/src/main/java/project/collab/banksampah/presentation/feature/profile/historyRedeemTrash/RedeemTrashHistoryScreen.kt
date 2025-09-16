@@ -42,7 +42,7 @@ fun RedeemTrashHistoryScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(vertical = it.calculateTopPadding(), horizontal = Spacing_16),
+                .padding(top = it.calculateTopPadding(), start = Spacing_16, end = Spacing_16)
         ) {
             item {
                 BaseHeader(
