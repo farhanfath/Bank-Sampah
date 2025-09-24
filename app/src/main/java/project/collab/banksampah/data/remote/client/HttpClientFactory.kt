@@ -4,6 +4,7 @@ import android.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.api.createClientPlugin
 import io.ktor.client.plugins.auth.Auth
 import io.ktor.client.plugins.auth.providers.BearerTokens
 import io.ktor.client.plugins.auth.providers.bearer
@@ -13,9 +14,9 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
+import project.collab.banksampah.BuildConfig
 import project.collab.banksampah.data.local.TokenDataSource
 
 object HttpClientFactory {
@@ -41,20 +42,24 @@ object HttpClientFactory {
                 level = LogLevel.ALL
             }
 
-            install(Auth) {
-                bearer {
-                    loadTokens {
-                        runBlocking {
-                            val token = tokenDataSource.getToken().first()
-                            if (token.isNotEmpty()) {
-                                BearerTokens(accessToken = token, refreshToken = "")
+            install(createClientPlugin("tokenAuth") {
+                onRequest { request, _ ->
+                    runBlocking {
+                        try {
+                            val token = tokenDataSource.getAccessToken()
+                            if (!token.isNullOrEmpty()) {
+                                request.headers.remove("Authorization")
+                                request.headers.append("Authorization", "Bearer $token")
+                                Log.d("HttpClient", "🔐 Token applied: ${token.take(10)}...")
                             } else {
-                                null
+                                Log.d("HttpClient", "🔓 No token - proceeding without auth")
                             }
+                        } catch (e: Exception) {
+                            Log.e("HttpClient", "❌ Token check failed: ${e.message}")
                         }
                     }
                 }
-            }
+            })
 
             // Request timeout
             install(HttpTimeout) {
@@ -65,7 +70,7 @@ object HttpClientFactory {
 
             // Default request configuration
             defaultRequest {
-                url("https://bank-sampah-api-gamma.vercel.app")
+                url(BuildConfig.BASE_URL)
                 headers.append("Content-Type", "application/json")
                 headers.append("Accept", "application/json")
             }

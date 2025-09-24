@@ -6,7 +6,6 @@ import project.collab.banksampah.data.remote.api.AuthApiService
 import project.collab.banksampah.data.remote.model.mapper.toDomain
 import project.collab.banksampah.data.remote.model.mapper.toDto
 import project.collab.banksampah.domain.model.LoginInfo
-import project.collab.banksampah.domain.model.User
 import project.collab.banksampah.domain.model.request.LoginRequest
 import project.collab.banksampah.domain.model.request.RegisterRequest
 import project.collab.banksampah.domain.model.response.auth.LoginResponse

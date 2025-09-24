@@ -1,5 +1,7 @@
 package project.collab.banksampah.presentation.feature.gallery.component
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -25,7 +27,6 @@ import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -35,8 +36,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,14 +50,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import coil3.compose.AsyncImage
-import coil3.request.ImageRequest
-import coil3.request.crossfade
+import kotlinx.coroutines.launch
 import project.collab.banksampah.domain.model.response.gallery.Gallery
 import project.collab.banksampah.presentation.components.base.BaseDialog
 import project.collab.banksampah.presentation.components.base.BaseImage
+import project.collab.banksampah.presentation.utils.ActionExtensions
 import project.collab.banksampah.presentation.utils.toFormattedDateTime
 
 @Composable
@@ -65,6 +64,9 @@ fun GalleryFullscreenDialog(
     onDismiss: () -> Unit,
     gallery: Gallery,
 ) {
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+
     BaseDialog(
         isVisible = isVisible,
         onDismiss = onDismiss,
@@ -272,7 +274,12 @@ fun GalleryFullscreenDialog(
                             // Share button
                             OutlinedButton(
                                 onClick = {
-                                    // Implement share functionality
+                                    coroutineScope.launch {
+                                        ActionExtensions.shareImage(
+                                            context = context,
+                                            imageUrl = gallery.fileURL
+                                        )
+                                    }
                                 },
                                 modifier = Modifier.weight(1f),
                                 colors = ButtonDefaults.outlinedButtonColors(
@@ -292,7 +299,15 @@ fun GalleryFullscreenDialog(
                             // Download button
                             OutlinedButton(
                                 onClick = {
-                                    // Implement download functionality
+                                    coroutineScope.launch {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                                            ActionExtensions.downloadImageFromUrl(
+                                                context = context,
+                                                imageUrl = gallery.fileURL,
+                                                fileName =  "${gallery.imgTitle}_${System.currentTimeMillis()}.jpg"
+                                            )
+                                        }
+                                    }
                                 },
                                 modifier = Modifier.weight(1f),
                                 colors = ButtonDefaults.outlinedButtonColors(

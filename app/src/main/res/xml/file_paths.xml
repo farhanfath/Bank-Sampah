@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- izinkan akses ke cache -->
+    <cache-path
+        name="shared_images"
+        path="." />
+
+    <!-- kalau mau izinkan ke folder lain (opsional) -->
+    <external-path
+        name="external_files"
+        path="." />
+</paths>
