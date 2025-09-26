@@ -8,6 +8,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,10 +27,14 @@ import project.collab.banksampah.presentation.components.base.BaseHeader
 import project.collab.banksampah.presentation.components.base.BaseTitleSection
 import project.collab.banksampah.presentation.components.base.rememberVisibilityState
 import project.collab.banksampah.presentation.feature.profile.ExchangeViewModel
+import project.collab.banksampah.presentation.feature.profile.PointExchangeStatus
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.RedeemPointCard
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.RedeemPointCardShimmer
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.RedeemPointFailedSection
+import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.RedeemPointFilterChip
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.detail.RedeemPointDetailDialog
+import project.collab.banksampah.presentation.feature.profile.historyredeempoint.util.getPointStatus
+import project.collab.banksampah.presentation.feature.profile.historyredeempoint.util.toPointExchangeStatus
 import project.collab.banksampah.presentation.theme.Spacing_10
 import project.collab.banksampah.presentation.theme.Spacing_16
 import project.collab.banksampah.presentation.theme.Spacing_20
@@ -42,9 +48,24 @@ fun RedeemPointHistoryScreen(
     exchangeViewModel: ExchangeViewModel = koinViewModel()
 ) {
     val redeemPointHistoryState = exchangeViewModel.redeemPointHistoryListState.collectAsLazyPagingItems()
+    val uiState by exchangeViewModel.pointRequestExchangeState.collectAsState()
 
     var selectedRedeemPoint by remember { mutableStateOf<RedeemPointHistory?>(null) }
     val detailRedeemDialog = rememberVisibilityState()
+
+    val filteredItems by remember {
+        derivedStateOf {
+            redeemPointHistoryState.itemSnapshotList.items.let { items ->
+                if (uiState.selectedStatus == PointExchangeStatus.ALL) {
+                    items
+                } else {
+                    items.filter {
+                        it?.statusPointExchange?.toPointExchangeStatus() == uiState.selectedStatus
+                    }
+                }
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -72,6 +93,13 @@ fun RedeemPointHistoryScreen(
                 BaseTitleSection(
                     title = "Riwayat"
                 )
+
+                RedeemPointFilterChip(
+                    selectedStatus = uiState.selectedStatus,
+                    onStatusSelected = { status ->
+                        exchangeViewModel.updateStatusFilter(status)
+                    }
+                )
             }
 
             handlePagingState(
@@ -83,7 +111,7 @@ fun RedeemPointHistoryScreen(
                 },
                 onSuccess = {
                     when {
-                        redeemPointHistoryState.itemCount == 0 -> {
+                        filteredItems.isEmpty() -> {
                             item {
                                 CommonEmptyState(
                                     message = "Belum ada penukaran poin yang dilakukan"
@@ -92,17 +120,12 @@ fun RedeemPointHistoryScreen(
                         }
                         else -> {
                             items(
-                                count = redeemPointHistoryState.itemCount,
+                                count = filteredItems.size,
                                 key = { index ->
-                                    val redeemPoint = redeemPointHistoryState[index]
-                                    if (redeemPoint != null) {
-                                        "redeemPoint_${redeemPoint.id}_$index"
-                                    } else {
-                                        "null_$index"
-                                    }
+                                    filteredItems[index]?.let { "redeemPoint_${it.id}_$index" } ?: "null_$index"
                                 }
                             ) { index ->
-                                redeemPointHistoryState[index]?.let { data ->
+                                filteredItems[index]?.let { data ->
                                     RedeemPointCard(
                                         historyRedeemPointData = data,
                                         onClick = {

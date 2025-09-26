@@ -7,5 +7,13 @@ data class PointExchangeUiState(
     val data: PointExchangeRequestResponse? = null,
     val error: String? = null,
     val isRequestExchangeSuccess: Boolean = false,
-    val isRequestExchangeFailed: Boolean = false
+    val isRequestExchangeFailed: Boolean = false,
+    val selectedStatus: PointExchangeStatus = PointExchangeStatus.ALL
 )
+
+enum class PointExchangeStatus(val displayName: String, val text: String) {
+    ALL("Semua", "All"),
+    APPROVED("Disetujui", "approved"),
+    PENDING("Menunggu", "pending"),
+    REJECTED("Ditolak", "rejected")
+}

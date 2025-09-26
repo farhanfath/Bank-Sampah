@@ -5,13 +5,17 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.collectAsLazyPagingItems
+import kotlinx.coroutines.delay
 import org.koin.compose.viewmodel.koinViewModel
 import project.collab.banksampah.domain.model.response.schedule.Schedule
 import project.collab.banksampah.presentation.components.CommonEmptyState
@@ -40,12 +44,28 @@ fun ScheduleScreen(
 
     val scheduleDialogState = rememberVisibilityState()
 
-    val filteredSchedules = remember(schedules.itemSnapshotList, uiState.selectedStatus) {
-        if (uiState.selectedStatus == ScheduleStatus.ALL) {
-            schedules.itemSnapshotList.items
-        } else {
-            schedules.itemSnapshotList.items.filter { schedule ->
-                schedule?.let { getScheduleStatus(it.openAt, it.closeAt) == uiState.selectedStatus } == true
+    var currentTimeMillis by remember { mutableLongStateOf(System.currentTimeMillis()) }
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(60_000)
+            currentTimeMillis = System.currentTimeMillis()
+        }
+    }
+
+    val filteredSchedules by remember {
+        derivedStateOf {
+            currentTimeMillis
+
+            val items = schedules.itemSnapshotList.items
+            if (uiState.selectedStatus == ScheduleStatus.ALL) {
+                items
+            } else {
+                items.filter { schedule ->
+                    schedule?.let {
+                        getScheduleStatus(it.openAt, it.closeAt) == uiState.selectedStatus
+                    } == true
+                }
             }
         }
     }

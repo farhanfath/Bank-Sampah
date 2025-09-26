@@ -51,4 +51,12 @@ class ExchangeViewModel (
                 }
         }
     }
+
+    fun updateStatusFilter(status: PointExchangeStatus) {
+        _pointRequestExchangeState.update { it.copy(selectedStatus = status) }
+    }
+
+    fun clearFilter() {
+        _pointRequestExchangeState.update { it.copy(selectedStatus = PointExchangeStatus.ALL) }
+    }
 }

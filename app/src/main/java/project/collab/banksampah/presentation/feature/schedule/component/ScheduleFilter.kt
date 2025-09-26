@@ -70,6 +70,8 @@ fun FilterSection(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(ScheduleStatus.entries.toTypedArray()) { status ->
+                val isSelected = selectedStatus == status
+
                 FilterChip(
                     onClick = { onStatusFilterChange(status) },
                     label = {
@@ -88,7 +90,10 @@ fun FilterSection(
                                 Box(
                                     modifier = Modifier
                                         .size(8.dp)
-                                        .background(dotColor, CircleShape)
+                                        .background(
+                                            color = if (isSelected) Color.White else dotColor,
+                                            shape = CircleShape
+                                        )
                                 )
                             }
 
