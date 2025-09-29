@@ -32,8 +32,7 @@ import project.collab.banksampah.presentation.feature.profile.historyredeempoint
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.RedeemPointCardShimmer
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.RedeemPointFailedSection
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.RedeemPointFilterChip
-import project.collab.banksampah.presentation.feature.profile.historyredeempoint.detail.RedeemPointDetailDialog
-import project.collab.banksampah.presentation.feature.profile.historyredeempoint.util.getPointStatus
+import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.RedeemPointDetailDialog
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.util.toPointExchangeStatus
 import project.collab.banksampah.presentation.theme.Spacing_10
 import project.collab.banksampah.presentation.theme.Spacing_16

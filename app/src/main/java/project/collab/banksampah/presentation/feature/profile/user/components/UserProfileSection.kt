@@ -40,40 +40,19 @@ import project.collab.banksampah.presentation.theme.Spacing_4
 @Composable
 fun UserProfileSection(
     userData: User,
-    onLogoutClick: () -> Unit,
-    onImageChangeClick: () -> Unit,
+    onLogoutClick: () -> Unit
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Box {
-            BaseCircleImage(
-                modifier = Modifier
-                    .padding(Spacing_16)
-                    .size(Size_100),
-                image = R.drawable.placeholder_default
-            )
-
-            IconButton(
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(end = Spacing_16, bottom = Spacing_16)
-                    .size(Size_20),
-                colors = IconButtonDefaults.iconButtonColors(
-                    containerColor = PrimaryGreen,
-                    contentColor = Color.White
-                ),
-                onClick = onImageChangeClick
-            ) {
-                Icon(
-                    modifier = Modifier.size(Size_12),
-                    imageVector = Icons.Default.CameraAlt,
-                    contentDescription = "edit profile"
-                )
-            }
-        }
+        BaseCircleImage(
+            modifier = Modifier
+                .padding(Spacing_16)
+                .size(Size_100),
+            image = R.drawable.placeholder_default
+        )
 
         Spacer(modifier = Modifier.size(Spacing_10))
 

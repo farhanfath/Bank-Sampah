@@ -49,6 +49,8 @@ fun RedeemPointScreen(
     LaunchedEffect(exchangePointState.isRequestExchangeSuccess) {
         if (exchangePointState.isRequestExchangeSuccess) {
             successDialogState.show()
+            redeemPointData = RedeemPointRequest()
+            exchangeViewModel.resetExchangeState()
         }
     }
 
@@ -82,7 +84,7 @@ fun RedeemPointScreen(
                 }
                 else -> {
                     TotalPointCard(
-                        totalPoint = userDataState.userData?.totalPointUser.replaceIfNull()
+                        totalPoint = userDataState.userData?.currentPointUser.replaceIfNull()
                     )
                 }
             }

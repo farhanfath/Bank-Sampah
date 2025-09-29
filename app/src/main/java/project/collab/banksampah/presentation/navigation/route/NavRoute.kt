@@ -7,6 +7,9 @@ import project.collab.banksampah.domain.model.response.article.Article
 sealed class NavRoute(val route: String) {
 
     @Serializable
+    object Splash: NavRoute("Splash")
+
+    @Serializable
     object Auth : NavRoute("Auth") {
 
         @Serializable

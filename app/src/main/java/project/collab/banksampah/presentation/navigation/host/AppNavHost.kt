@@ -14,6 +14,7 @@ import project.collab.banksampah.presentation.feature.profile.historyRedeemTrash
 import project.collab.banksampah.presentation.feature.profile.historyredeempoint.RedeemPointHistoryScreen
 import project.collab.banksampah.presentation.feature.profile.redeempoint.RedeemPointScreen
 import project.collab.banksampah.presentation.feature.profile.user.ProfileUserScreen
+import project.collab.banksampah.presentation.feature.splash.BankSampahSplashScreen
 import project.collab.banksampah.presentation.navigation.extensions.navigateToLogin
 import project.collab.banksampah.presentation.navigation.extensions.navigateToRedeemPointHistory
 import project.collab.banksampah.presentation.navigation.extensions.navigateToRegister
@@ -25,8 +26,20 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = NavRoute.Home
+        startDestination = NavRoute.Splash
     ) {
+        composable<NavRoute.Splash> {
+            BankSampahSplashScreen(
+                onSplashComplete = {
+                    navController.navigate(NavRoute.Home) {
+                        popUpTo(NavRoute.Splash) {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
         navigation<NavRoute.Home>(
             startDestination = NavRoute.Home.Lobby
         ) {

@@ -116,7 +116,6 @@ fun ProfileUserScreen(
                     userDataState.userData?.let { user ->
                         UserProfileSection(
                             userData = user,
-                            onImageChangeClick = profileImageChangeBottomSheetState::show,
                             onLogoutClick = logoutDialogState::show
                         )
                     }

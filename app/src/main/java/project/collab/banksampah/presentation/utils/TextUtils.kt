@@ -10,6 +10,8 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.graphics.Color
+import java.text.NumberFormat
+import java.util.Locale
 import java.util.regex.Pattern
 
 /**
@@ -322,4 +324,19 @@ object HtmlStringUtils {
             }
         }
     }
+}
+
+fun Int.toRupiah(): String {
+    val formatter = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
+    return formatter.format(this).replace("Rp", "Rp.").replace(",00", "")
+}
+
+// Parser String -> Int
+fun String.toIntSafe(): Int {
+    return this.filter { it.isDigit() }.toIntOrNull() ?: 0
+}
+
+fun Int.toThousandSeparator(): String {
+    val formatter = NumberFormat.getNumberInstance(Locale("in", "ID"))
+    return formatter.format(this)
 }

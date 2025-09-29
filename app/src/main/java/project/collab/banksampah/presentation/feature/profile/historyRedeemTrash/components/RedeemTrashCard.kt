@@ -31,6 +31,7 @@ import project.collab.banksampah.presentation.theme.Spacing_30
 import project.collab.banksampah.presentation.theme.Spacing_4
 import project.collab.banksampah.presentation.theme.Spacing_8
 import project.collab.banksampah.presentation.utils.toFormattedDateTime
+import project.collab.banksampah.presentation.utils.toRupiah
 
 @Composable
 fun RedeemTrashCard(
@@ -80,7 +81,7 @@ fun RedeemTrashCard(
                     Spacer(modifier = Modifier.size(Spacing_10))
 
                     Text(
-                        text = redeemTrashHistoryData.totalPoint.toString(),
+                        text = redeemTrashHistoryData.totalPoint.toRupiah(),
                         style = MaterialTheme.typography.bodySmall
                     )
                 }

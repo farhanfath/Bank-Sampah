@@ -2,7 +2,6 @@ package project.collab.banksampah.presentation.feature.profile.redeempoint.compo
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,17 +17,19 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import project.collab.banksampah.domain.model.request.RedeemPointRequest
 import project.collab.banksampah.presentation.components.base.BaseButton
 import project.collab.banksampah.presentation.components.base.BaseCard
 import project.collab.banksampah.presentation.components.base.BaseTextField
 import project.collab.banksampah.presentation.components.base.BaseTitleSection
+import project.collab.banksampah.presentation.components.base.RupiahTextField
 import project.collab.banksampah.presentation.theme.Size_1
 import project.collab.banksampah.presentation.theme.Spacing_10
 import project.collab.banksampah.presentation.theme.Spacing_16
 import project.collab.banksampah.presentation.theme.Spacing_4
+import project.collab.banksampah.presentation.utils.toIntSafe
+import project.collab.banksampah.presentation.utils.toRupiah
 
 @Composable
 fun RedeemPointForm(
@@ -61,33 +62,32 @@ fun RedeemPointForm(
                 )
             )
 
-            BaseTextField(
-                hint = "Masukan Jumlah Poin",
-                value = if (redeemPointRequest.pointToRedeem == 0) "" else redeemPointRequest.pointToRedeem.toString(),
-                onValueChange = { input ->
-                    val parsedValue = when {
-                        input.isEmpty() -> 0
-                        input.all { it.isDigit() } -> {
-                            try {
-                                input.toInt()
-                            } catch (e: NumberFormatException) {
-                                0
-                            }
-                        }
-
-                        else -> redeemPointRequest.pointToRedeem
-                    }
+            RupiahTextField(
+                value = redeemPointRequest.pointToRedeem,
+                onValueChange = { parsedValue ->
                     onDataChange(redeemPointRequest.copy(pointToRedeem = parsedValue))
-                },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Next
-                ),
-                keyboardActions = KeyboardActions(
-                    onNext = { focusManager.moveFocus(FocusDirection.Down) }
-                ),
-                enabled = !isLoading
+                }
             )
+//            BaseTextField(
+//                hint = "Masukan Jumlah Poin",
+//                value = if (redeemPointRequest.pointToRedeem == 0) ""
+//                else redeemPointRequest.pointToRedeem.toRupiah(),
+//                onValueChange = { input ->
+//                    val parsedValue = when {
+//                        input.isEmpty() -> 0
+//                        else -> input.toIntSafe()
+//                    }
+//                    onDataChange(redeemPointRequest.copy(pointToRedeem = parsedValue))
+//                },
+//                keyboardOptions = KeyboardOptions(
+//                    keyboardType = KeyboardType.Number,
+//                    imeAction = ImeAction.Next
+//                ),
+//                keyboardActions = KeyboardActions(
+//                    onNext = { focusManager.moveFocus(FocusDirection.Down) }
+//                ),
+//                enabled = !isLoading
+//            )
 
             Spacer(modifier = Modifier.size(Spacing_16))
 

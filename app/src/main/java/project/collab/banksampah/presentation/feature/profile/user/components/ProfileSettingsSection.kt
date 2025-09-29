@@ -66,13 +66,13 @@ fun ProfileSettingsSection(
             )
         }
 
-        item {
-            ProfileSettingItem(
-                icon = R.drawable.ic_faq,
-                title = "FAQs",
-                onClick = onFaqClick
-            )
-        }
+//        item {
+//            ProfileSettingItem(
+//                icon = R.drawable.ic_faq,
+//                title = "FAQs",
+//                onClick = onFaqClick
+//            )
+//        }
 
     }
 }

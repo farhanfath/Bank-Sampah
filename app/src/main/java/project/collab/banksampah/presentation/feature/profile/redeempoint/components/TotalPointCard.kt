@@ -4,32 +4,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Error
-import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import project.collab.banksampah.R
 import project.collab.banksampah.presentation.components.base.BaseCard
 import project.collab.banksampah.presentation.components.base.BaseImage
-import project.collab.banksampah.presentation.components.base.BaseShimmer
-import project.collab.banksampah.presentation.theme.PrimaryGreen
-import project.collab.banksampah.presentation.theme.Size_20
 import project.collab.banksampah.presentation.theme.Size_30
 import project.collab.banksampah.presentation.theme.Spacing_12
 import project.collab.banksampah.presentation.theme.Spacing_16
-import project.collab.banksampah.presentation.theme.Spacing_8
+import project.collab.banksampah.presentation.utils.toRupiah
 
 @Composable
 fun ColumnScope.TotalPointCard(
@@ -55,7 +43,7 @@ fun ColumnScope.TotalPointCard(
                 )
 
                 Text(
-                    text = "$totalPoint",
+                    text = totalPoint.toRupiah(),
                     style = MaterialTheme.typography.bodyMedium
                 )
             }

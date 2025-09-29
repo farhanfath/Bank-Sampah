@@ -37,7 +37,7 @@ import project.collab.banksampah.domain.model.response.trash_exchange.ListOfTras
 import project.collab.banksampah.domain.model.response.trash_exchange.TrashExchangeHistory
 import project.collab.banksampah.presentation.components.base.BaseDialog
 import project.collab.banksampah.presentation.components.base.BaseImage
-import project.collab.banksampah.presentation.feature.profile.historyredeempoint.detail.SelectableText
+import project.collab.banksampah.presentation.feature.profile.historyredeempoint.components.SelectableText
 import project.collab.banksampah.presentation.theme.PrimaryGreen
 import project.collab.banksampah.presentation.theme.Size_12
 import project.collab.banksampah.presentation.theme.Size_20
@@ -48,6 +48,7 @@ import project.collab.banksampah.presentation.theme.Spacing_24
 import project.collab.banksampah.presentation.theme.Spacing_4
 import project.collab.banksampah.presentation.theme.Spacing_8
 import project.collab.banksampah.presentation.utils.toFormattedDateTime
+import project.collab.banksampah.presentation.utils.toRupiah
 import java.text.NumberFormat
 import java.util.Locale
 import kotlin.collections.forEach
@@ -216,7 +217,7 @@ private fun TrashTransactionInfoSection(
 
             TrashDetailInfoItem(
                 label = "Total Poin Diperoleh",
-                value = "${data.totalPoint} Poin",
+                value = data.totalPoint.toRupiah(),
                 valueColor = PrimaryGreen,
                 showPointIcon = true
             )

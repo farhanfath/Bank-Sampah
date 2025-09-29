@@ -21,8 +21,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,6 +36,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import project.collab.banksampah.presentation.theme.AccentGrey
@@ -44,6 +47,9 @@ import project.collab.banksampah.presentation.theme.Size_20
 import project.collab.banksampah.presentation.theme.Spacing_12
 import project.collab.banksampah.presentation.theme.Spacing_16
 import project.collab.banksampah.presentation.theme.Spacing_4
+import project.collab.banksampah.presentation.utils.toIntSafe
+import project.collab.banksampah.presentation.utils.toRupiah
+import project.collab.banksampah.presentation.utils.toThousandSeparator
 
 @Composable
 fun BaseTextField(
@@ -313,5 +319,35 @@ fun AddressTextField(
                 modifier = Modifier.size(Size_20)
             )
         }
+    )
+}
+
+@Composable
+fun RupiahTextField(
+    value: Int,
+    onValueChange: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    BaseTextField(
+        modifier = modifier,
+        hint = "Masukan Jumlah Poin",
+        value = if (value == 0) "" else value.toThousandSeparator(),
+        onValueChange = { newText ->
+            val parsed = newText.filter { it.isDigit() }.toIntOrNull() ?: 0
+            onValueChange(parsed)
+        },
+        leadingIcon = {
+            Text(
+                text = "Rp.",
+                style = MaterialTheme.typography.bodyMedium
+            )
+        },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Number,
+            imeAction = ImeAction.Next
+        ),
+        keyboardActions = KeyboardActions(
+            onNext = { /* pindah fokus */ }
+        )
     )
 }

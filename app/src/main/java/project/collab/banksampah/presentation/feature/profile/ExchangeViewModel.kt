@@ -59,4 +59,14 @@ class ExchangeViewModel (
     fun clearFilter() {
         _pointRequestExchangeState.update { it.copy(selectedStatus = PointExchangeStatus.ALL) }
     }
+
+    fun resetExchangeState() {
+        _pointRequestExchangeState.update {
+            it.copy(
+                isRequestExchangeSuccess = false,
+                isRequestExchangeFailed = false,
+                error = null
+            )
+        }
+    }
 }
